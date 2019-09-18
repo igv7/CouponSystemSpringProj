@@ -13,6 +13,11 @@ import com.igor.CouponSystemSpringProj.repo.CustomerRepository;
 @Transactional
 public class CustomerService implements Facade {
 	
+	private long custId;
+	public void setCustId(long custId) {
+		this.custId = custId;
+	}
+	
 	@Autowired
 	private CustomerRepository customerRepository;
 	

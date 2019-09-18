@@ -12,6 +12,11 @@ import com.igor.CouponSystemSpringProj.repo.CustomerRepository;
 @Transactional
 public class CompanyService implements Facade {
 	
+	private long compId;
+	public void setCompId(long compId) {
+		this.compId = compId;
+	}
+	
 	@Autowired
 	private CompanyRepository companyRepository;
 	
