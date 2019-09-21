@@ -14,4 +14,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 	@Query("SELECT company from Company as company join company.coupons As c WHERE c.id=:id")
 	public Company findCompanyByCoupon(long id);
 
+	public boolean existsByName(String name);
+
 }

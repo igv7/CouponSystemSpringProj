@@ -20,9 +20,9 @@ public class CouponSystemSpringProjApplication {
 		System.out.println("Welcome to Coupon System!");
 	}
 	
-	@Bean
-	public HashMap<String, ClientSession> getHashMap(){
-		return new HashMap<String, ClientSession>();
-	}
+//	@Bean
+//	public HashMap<String, ClientSession> getHashMap(){
+//		return new HashMap<String, ClientSession>();
+//	}
 
 }
