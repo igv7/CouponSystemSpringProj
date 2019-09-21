@@ -1,7 +1,10 @@
 package com.igor.CouponSystemSpringProj.rest;
 
+import org.springframework.stereotype.Component;
+
 import com.igor.CouponSystemSpringProj.service.Facade;
 
+@Component//
 public class ClientSession {
 	
 	private Facade facade;
