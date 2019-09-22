@@ -11,7 +11,7 @@ import com.igor.CouponSystemSpringProj.model.Coupon;
 @Repository
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
-	public Coupon deleteCouponsByCompanyId(long id);
+	public Coupon deleteCouponsById(long id);
 	
 	//for Expired Coupons
 		@Query("SELECT c from Coupon As c WHERE c.endDate <= CURRENT_DATE")

@@ -77,7 +77,7 @@ public class AdminService implements Facade {
 			if (!companyRepository.existsById(id)) {
 				throw new Exception("Admin failed to remove company - this company id doesn't exist: " + id);
 			} else {
-				couponRepository.deleteCouponsByCompanyId(id);//deleteByCompanyId
+				couponRepository.deleteCouponsById(id);//deleteByCompanyId
 				companyRepository.deleteById(id);
 				serviceStatus.setSuccess(true);
 				serviceStatus.setMessage("Success, Admin removed company successfully. company id: " + id);
