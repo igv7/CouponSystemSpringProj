@@ -14,7 +14,7 @@ import com.igor.CouponSystemSpringProj.model.Customer;
 import com.igor.CouponSystemSpringProj.repo.CompanyRepository;
 import com.igor.CouponSystemSpringProj.repo.CouponRepository;
 import com.igor.CouponSystemSpringProj.repo.CustomerRepository;
-import com.igor.CouponSystemSpringProj.service.ServiceStatus;//
+//import com.igor.CouponSystemSpringProj.service.ServiceStatus;//
 
 @Service
 @Transactional
@@ -29,8 +29,8 @@ public class AdminService implements Facade {
 	@Autowired
 	private CouponRepository couponRepository;
 	
-	@Autowired
-	private ServiceStatus serviceStatus;//
+//	@Autowired
+//	private ServiceStatus serviceStatus;//
 	
 	
 	//for CompanyController
@@ -61,7 +61,7 @@ public class AdminService implements Facade {
 				throw new Exception("Company doesn't exist");
 			} else {
 				temp = optional.get();
-				temp.setName(company.getName());
+//				temp.setName(company.getName());
 				temp.setPassword(company.getPassword());
 				temp.setEmail(company.getEmail());
 				companyRepository.save(temp);
@@ -72,34 +72,62 @@ public class AdminService implements Facade {
 		return temp;
 	}
 	
-	public ServiceStatus removeCompany(long id) throws Exception {
+	public Company removeCompany(long id) throws Exception {
+		Company temp = null;
 		try {
-			if (!companyRepository.existsById(id)) {
+			Optional<Company> optional = companyRepository.findById(id);
+			if (!optional.isPresent()) {
 				throw new Exception("Admin failed to remove company - this company id doesn't exist: " + id);
 			} else {
-				couponRepository.deleteCouponsById(id);//deleteByCompanyId
-				companyRepository.deleteById(id);
-				serviceStatus.setSuccess(true);
-				serviceStatus.setMessage("Success, Admin removed company successfully. company id: " + id);
+				temp = optional.get();
+				couponRepository.deleteCouponsById(temp.getId());//id    //deleteByCompanyId
+				companyRepository.deleteById(temp.getId());//id
+//				serviceStatus.setSuccess(true);
+//				serviceStatus.setMessage("Success, Admin removed company successfully. company id: " + id);
 				System.out.println("Admin removed company successfully. company id: " + id);
-				return serviceStatus;
+//				return serviceStatus;
 			}
 		} catch (ObjectNotFoundException e) {
 			System.err.println(e.getMessage());
-			serviceStatus.setSuccess(false);
-			serviceStatus.setMessage(e.getMessage());
+//			serviceStatus.setSuccess(false);
+//			serviceStatus.setMessage(e.getMessage());
 		} catch (Exception e) {
 			throw new Exception("Admin failed to remove company. company id: " + id);
 		}
-		return serviceStatus;
+		return temp;
 	}
 
-	public Company getCompany() {
-		return null;
+	public Company getCompany(long id) throws Exception {
+		Company temp = null;
+		try {
+			Optional<Company> optional = companyRepository.findById(id);
+			if (!optional.isPresent()) {
+				throw new Exception("Admin failed to get company - this company id doesn't exist: " + id);
+			} else {
+				temp = optional.get();
+			}
+		} catch (ObjectNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("Admin failed to get company - this company id doesn't exist: " + id);
+		}
+		return temp;
 	}
 
-	public List<Company> getAllCompanies() {
-		return null;
+	public List<Company> getAllCompanies() throws Exception {
+		List<Company> companies = null;//
+		try {
+			if (companyRepository.findAll().isEmpty()) {
+				throw new Exception("Admin failed to get all companies");
+			} else {
+				companies = companyRepository.findAll(); //List<Company> companies = companyRepository.findAll();
+				System.out.println(companies);
+				return companies;
+			}
+		} catch (Exception e) {
+			throw new Exception("Admin failed to get all companies");
+		}
+//		return null;
 	}
 	
 	

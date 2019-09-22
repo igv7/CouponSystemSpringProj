@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -87,12 +88,36 @@ public class AdminController {
 		}
 	}
 
-	public Company getCompany() {
-		return null;
+	@GetMapping("/viewCompany/{token}/{id}")
+	public ResponseEntity<?> getCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (adminService.getCompany(id), HttpStatus.OK);
+//				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getCompany(), HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 
-	public List<Company> getAllCompanies() {
-		return null;
+	@GetMapping("/viewAllCompanies/{token}")
+	public ResponseEntity<?> getAllCompanies(@PathVariable String token) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (adminService.getAllCompanies(), HttpStatus.OK);
+//				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getAllCompanies(), HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 	
 	

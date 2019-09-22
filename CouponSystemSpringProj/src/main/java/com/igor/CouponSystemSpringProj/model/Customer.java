@@ -60,7 +60,7 @@ public class Customer {
 		this.id = id;
 	}
 	
-	@Column(name = "name", updatable = true, nullable = false)
+	@Column(name = "name", updatable = true, nullable = false, unique = true)
 	public String getName() {
 		return name;
 	}
