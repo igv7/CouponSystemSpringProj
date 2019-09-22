@@ -42,8 +42,8 @@ public class AdminController {
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.createCompany(company);
-//			((AdminService) clientSession.getFacade()).createCompany(company);
+//				adminService.createCompany(company);
+			((AdminService) clientSession.getFacade()).createCompany(company);
 				return new ResponseEntity<>("Company added", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -59,8 +59,8 @@ public class AdminController {
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.updateCompany(company);
-//			((AdminService) clientSession.getFacade()).updateCompany(company);
+//				adminService.updateCompany(company);
+			((AdminService) clientSession.getFacade()).updateCompany(company);
 				return new ResponseEntity<>("Company updated", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -76,8 +76,8 @@ public class AdminController {
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.removeCompany(id);
-//			((AdminService) clientSession.getFacade()).removeCompany(id);
+//				adminService.removeCompany(id);
+			((AdminService) clientSession.getFacade()).removeCompany(id);
 				return new ResponseEntity<>("Company removed", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
