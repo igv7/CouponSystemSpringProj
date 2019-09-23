@@ -28,6 +28,8 @@ public class AdminController {
 	private Map<String, ClientSession> tokensMap;
 
 	private ClientSession isActive(String token) {
+//		System.out.println("token " +token);
+//		System.out.println(tokensMap.size());
 		return tokensMap.get(token);
 	}
 
@@ -39,7 +41,13 @@ public class AdminController {
 
 	@PostMapping("/addCompany/{token}")
 	public ResponseEntity<String> createCompany(@RequestBody Company company, @PathVariable("token") String token) {
+//		System.out.println("a1");
 		ClientSession clientSession = isActive(token);
+//		System.out.println("a2");
+//		System.out.println(tokensMap.size());
+//		System.out.println("a3");
+//		System.out.println(clientSession.getFacade()+" "+clientSession.getLastAccessed());
+//		System.out.println("a4");
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {

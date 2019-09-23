@@ -45,6 +45,7 @@ public class AdminService implements Facade {
 							"Admin failed to add company - this company already exists: " + company.getName());
 				} else {
 					companyRepository.save(company);
+					System.out.println("Success to add Company: "+company);
 				}
 			}
 		} catch (Exception e) {
