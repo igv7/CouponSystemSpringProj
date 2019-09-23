@@ -15,5 +15,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	
 	@Query("SELECT customer FROM Customer as customer join customer.coupons As c WHERE c.id=:id")
 	List<Customer> findCustomersByCoupon(long id);
+	
+	public boolean existsByName(String name);
 
 }

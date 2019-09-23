@@ -133,24 +133,98 @@ public class AdminService implements Facade {
 	
 	//for CustomerController
 
-	public Customer createCustomer() {
-		return null;
+	public Customer createCustomer(Customer customer) throws Exception {
+		try {
+			if (customerRepository.existsById(customer.getId())) {
+				throw new Exception("Admin failed to add customer - this id already in use " + customer.getId());
+			} else {
+				if (customerRepository.existsByName(customer.getName())) {
+					throw new Exception(
+							"Admin failed to add customer - this customer already exists: " + customer.getName());
+				} else {
+					customerRepository.save(customer);
+				}
+			}
+		} catch (Exception e) {
+			throw new Exception("Cannot create customer " + e.getMessage());
+		}
+		return customer;
+	}
+	
+	public Customer updateCustomer(Customer customer) throws Exception {
+		Customer temp = null;
+		try {
+			Optional<Customer> optional = customerRepository.findById(customer.getId());
+			if (!optional.isPresent()) {
+				throw new Exception("Customer doesn't exist");
+			} else {
+				temp = optional.get();
+//				temp.setName(customer.getName());
+				temp.setPassword(customer.getPassword());
+				customerRepository.save(temp);
+			}
+		} catch (Exception e) {
+			throw new Exception("Cannot update customer " + e.getMessage());
+		}
+		return temp;
+	}
+	
+	public Customer removeCustomer(long id) throws Exception {
+		Customer temp = null;
+		try {
+			Optional<Customer> optional = customerRepository.findById(id);
+			if (!optional.isPresent()) {
+				throw new Exception("Admin failed to remove customer - this customer id doesn't exist: " + id);
+			} else {
+				temp = optional.get();
+				couponRepository.deleteCouponsById(temp.getId());//id    //deleteByCustomerId
+				customerRepository.deleteById(temp.getId());//id
+//				serviceStatus.setSuccess(true);
+//				serviceStatus.setMessage("Success, Admin removed customer successfully. customer id: " + id);
+				System.out.println("Admin removed customer successfully. customer id: " + id);
+//				return serviceStatus;
+			}
+		} catch (ObjectNotFoundException e) {
+			System.err.println(e.getMessage());
+//			serviceStatus.setSuccess(false);
+//			serviceStatus.setMessage(e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("Admin failed to remove customer. customer id: " + id);
+		}
+		return temp;
 	}
 
-	public Customer updateCustomer() {
-		return null;
+	public Customer getCustomer(long id) throws Exception {
+		Customer temp = null;
+		try {
+			Optional<Customer> optional = customerRepository.findById(id);
+			if (!optional.isPresent()) {
+				throw new Exception("Admin failed to get customer - this customer id doesn't exist: " + id);
+			} else {
+				temp = optional.get();
+			}
+		} catch (ObjectNotFoundException e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("Admin failed to get customer - this customer id doesn't exist: " + id);
+		}
+		return temp;
 	}
 
-	public Customer removeCustomer() {
-		return null;
-	}
-
-	public Customer getCustomer() {
-		return null;
-	}
-
-	public List<Customer> getAllCustomers() {
-		return null;
+	public List<Customer> getAllCustomers() throws Exception {
+		List<Customer> customers = null;//
+		try {
+			if (customerRepository.findAll().isEmpty()) {
+				throw new Exception("Admin failed to get all customers");
+			} else {
+				customers = customerRepository.findAll(); //List<Customer> customers = customerRepository.findAll();
+				System.out.println(customers);
+				return customers;
+			}
+		} catch (Exception e) {
+			throw new Exception("Admin failed to get all customers");
+		}
+//		return null;
 	}
 
 }

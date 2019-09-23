@@ -123,24 +123,87 @@ public class AdminController {
 	
 	//for Customer
 
-	public Customer createCustomer() {
-		return null;
+	@PostMapping("/addCustomer/{token}")
+	public ResponseEntity<String> createCustomer(@RequestBody Customer customer, @PathVariable("token") String token) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				adminService.createCustomer(customer);
+//			((AdminService) clientSession.getFacade()).createCustomer(customer);
+				return new ResponseEntity<>("Customer added", HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 
-	public Customer updateCustomer() {
-		return null;
+	@PutMapping("/updateCustomer/{token}")
+	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable("token") String token) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				adminService.updateCustomer(customer);
+//			((AdminService) clientSession.getFacade()).updateCustomer(customer);
+				return new ResponseEntity<>("Customer updated", HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 
-	public Customer removeCustomer() {
-		return null;
+	@DeleteMapping("/deleteCustomer/{token}/{id}")
+	public ResponseEntity<String> removeCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				adminService.removeCustomer(id);
+//			((AdminService) clientSession.getFacade()).removeCustomer(id);
+				return new ResponseEntity<>("Customer removed", HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 
-	public Customer getCustomer() {
-		return null;
+	@GetMapping("/viewCustomer/{token}/{id}")
+	public ResponseEntity<?> getCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (adminService.getCustomer(id), HttpStatus.OK);
+//				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getCustomer(), HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 
-	public List<Customer> getAllCustomers() {
-		return null;
+	@GetMapping("/viewAllCustomers/{token}")
+	public ResponseEntity<?> getAllCustomers(@PathVariable String token) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (adminService.getAllCustomers(), HttpStatus.OK);
+//				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getAllCustomers(), HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
 	}
 
 }
