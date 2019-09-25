@@ -65,6 +65,7 @@ public class AdminService implements Facade {
 				temp.setPassword(company.getPassword());
 				temp.setEmail(company.getEmail());
 				companyRepository.save(temp);
+				System.out.println("Success to update Company: "+temp);
 			}
 		} catch (Exception e) {
 			throw new Exception("Cannot update company " + e.getMessage());
@@ -105,6 +106,8 @@ public class AdminService implements Facade {
 				throw new Exception("Admin failed to get company - this company id doesn't exist: " + id);
 			} else {
 				temp = optional.get();
+				System.out.println(temp);
+//				return temp;
 			}
 		} catch (ObjectNotFoundException e) {
 			System.err.println(e.getMessage());
@@ -143,6 +146,7 @@ public class AdminService implements Facade {
 							"Admin failed to add customer - this customer already exists: " + customer.getName());
 				} else {
 					customerRepository.save(customer);
+					System.out.println("Success to add Customer: "+customer);
 				}
 			}
 		} catch (Exception e) {
@@ -162,6 +166,7 @@ public class AdminService implements Facade {
 //				temp.setName(customer.getName());
 				temp.setPassword(customer.getPassword());
 				customerRepository.save(temp);
+				System.out.println("Success to update Customer: "+temp);
 			}
 		} catch (Exception e) {
 			throw new Exception("Cannot update customer " + e.getMessage());
@@ -202,6 +207,8 @@ public class AdminService implements Facade {
 				throw new Exception("Admin failed to get customer - this customer id doesn't exist: " + id);
 			} else {
 				temp = optional.get();
+				System.out.println(temp);
+//				return temp;
 			}
 		} catch (ObjectNotFoundException e) {
 			System.err.println(e.getMessage());

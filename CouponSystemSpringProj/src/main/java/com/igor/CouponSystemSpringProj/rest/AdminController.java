@@ -61,8 +61,8 @@ public class AdminController {
 		}
 	}
 
-	@PutMapping("/updateCompany/{token}")
-	public ResponseEntity<String> updateCompany(@RequestBody Company company, @PathVariable("token") String token) {
+	@PutMapping("/updateCompany/{token}/{id}")
+	public ResponseEntity<String> updateCompany(@RequestBody Company company, @PathVariable("token") String token, @PathVariable long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
@@ -147,8 +147,8 @@ public class AdminController {
 		}
 	}
 
-	@PutMapping("/updateCustomer/{token}")
-	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable("token") String token) {
+	@PutMapping("/updateCustomer/{token}/{id}")
+	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable("token") String token, @PathVariable long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());

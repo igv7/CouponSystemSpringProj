@@ -1,6 +1,7 @@
 package com.igor.CouponSystemSpringProj.model;
 
 import java.sql.Date;
+import java.time.LocalDate;//
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.igor.CouponSystemSpringProj.enums.CouponType;
 
 //import lombok.RequiredArgsConstructor;
@@ -31,7 +32,9 @@ public class Coupon {
 	
 	private long id;
 	private String title;
-	private Date startDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private Date startDate = Date.valueOf(LocalDate.now());//
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date endDate;
 	private int amount;
 	private CouponType type;

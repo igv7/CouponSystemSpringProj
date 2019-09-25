@@ -17,5 +17,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 		@Query("SELECT c from Coupon As c WHERE c.endDate <= CURRENT_DATE")
 		List<Coupon> findExpiredCoupons();
 		
+		public boolean existsByTitle(String title);
 
 }
