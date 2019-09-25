@@ -2,6 +2,7 @@ package com.igor.CouponSystemSpringProj.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,44 @@ public class CompanyService implements Facade {
 			}
 		} catch (Exception e) {
 			throw new CouponSystemException("Cannot create coupon " + e.getMessage());
+		}
+		return coupon;
+	}
+	
+	public Coupon updateCouponEndDate(long id, Date endDate) throws CouponSystemException {
+		//check if coupon exists
+		Coupon coupon = null;
+		Optional<Coupon> optional = couponRepository.findById(id);
+		if (!optional.isPresent()) {
+			throw new CouponSystemException("Coupon does not exist");
+		} else {
+			coupon = optional.get();
+		}
+		try {
+			coupon.setEndDate(endDate);
+			//update
+			couponRepository.save(coupon);
+		} catch (Exception e) {
+			throw new CouponSystemException("Could not update coupon endDate! ", e);
+		}
+		return coupon;
+	}
+	
+	public Coupon updateCouponPrice(long id, double price) throws CouponSystemException {
+		//check if coupon exists
+		Coupon coupon = null;
+		Optional<Coupon> optional = couponRepository.findById(id);
+		if (!optional.isPresent()) {
+			throw new CouponSystemException("Coupon does not exist");
+		} else {
+			coupon = optional.get();
+		}
+		try {
+			coupon.setPrice(price);
+			//update
+			couponRepository.save(coupon);
+		} catch (Exception e) {
+			throw new CouponSystemException("Could not update coupon price! ", e);
 		}
 		return coupon;
 	}
