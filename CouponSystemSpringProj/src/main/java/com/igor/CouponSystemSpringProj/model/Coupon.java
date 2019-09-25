@@ -32,9 +32,9 @@ public class Coupon {
 	
 	private long id;
 	private String title;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date startDate = Date.valueOf(LocalDate.now());//
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date endDate;
 	private int amount;
 	private CouponType type;
