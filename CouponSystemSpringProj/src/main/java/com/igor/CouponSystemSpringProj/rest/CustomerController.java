@@ -55,7 +55,8 @@ public class CustomerController {
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				return new ResponseEntity<> (customerService.getAllPurchasedCoupons(), HttpStatus.OK);
+				customerService.getAllPurchasedCoupons();
+				return new ResponseEntity<> ("Success on get customer coupons ", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -71,7 +72,8 @@ public class CustomerController {
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				return new ResponseEntity<> (customerService.getAllPurchasedCouponsByType(type), HttpStatus.OK);
+				customerService.getAllPurchasedCouponsByType(type);
+				return new ResponseEntity<> ("Success on get customer coupons by type ", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -87,7 +89,8 @@ public class CustomerController {
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				return new ResponseEntity<> (customerService.getAllPurchasedCouponsByPrice(price), HttpStatus.OK);
+				customerService.getAllPurchasedCouponsByPrice(price);
+				return new ResponseEntity<> ("Success on get customer coupons by price ", HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
