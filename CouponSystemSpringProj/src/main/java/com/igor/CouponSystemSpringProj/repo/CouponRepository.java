@@ -17,8 +17,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
 	public Coupon deleteCouponsById(long id);
 	
-	public boolean findCompanyCoupon(boolean b);
-	
 	
 	//for CompanyService
 	@Query("SELECT c from Company as company join company.coupons As c WHERE company.id=:id")
@@ -34,6 +32,8 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	public List<Coupon> findCompanyCouponByEndDate(long id, Date endDate);
 	
 	
+	public boolean findCompanyCoupon(boolean b);
+	
 	public List<Coupon> findAllByCompanyId(long id); 
 	
 	public List<Coupon> findAllByCompanyIdAndType(long id, CouponType type);
@@ -43,7 +43,8 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	public List<Coupon> findAllByCompanyIdAndEndDateLessThanEqual(long id, Date untilDate);
 		
 		
-		
+	
+	
 	//for CustomerService
 	@Query("SELECT c from Customer as customer join customer.coupons As c WHERE customer.id=:id")
 	public List<Coupon> findCustomerCoupon(long id);

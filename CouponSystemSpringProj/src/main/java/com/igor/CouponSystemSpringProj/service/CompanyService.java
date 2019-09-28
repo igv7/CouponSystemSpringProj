@@ -156,11 +156,12 @@ public class CompanyService implements Facade {
 	
 	//Get Coupon
 	public Coupon getCoupon(long id) throws Exception {
+		Company company = companyRepository.findById(compId).get();
 		Coupon temp = null;
 		try {
 			Optional<Coupon> optional = couponRepository.findById(id);
 			if (!optional.isPresent()) {
-				throw new Exception("Company failed to get coupon - this coupon id doesn't exist: " + id);
+				throw new Exception("Company " +company.getName()+ " failed to get coupon - this coupon id doesn't exist: " + id);
 			} else {
 				temp = optional.get();
 				System.out.println(temp);
@@ -169,7 +170,7 @@ public class CompanyService implements Facade {
 		} catch (ObjectNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (Exception e) {
-			throw new Exception("Company failed to get coupon - this coupon id doesn't exist: " + id);
+			throw new Exception("Company " +company.getName()+ " failed to get coupon - this coupon id doesn't exist: " + id);
 		}
 		return temp;
 	}
@@ -182,7 +183,7 @@ public class CompanyService implements Facade {
 //			if (couponRepository.findAll().isEmpty()) {
 //			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
-				throw new Exception("Company failed to get all coupons. Coupons do not exist");
+				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCompanyCoupon(company.getId());
@@ -190,7 +191,7 @@ public class CompanyService implements Facade {
 				return coupons;
 			}
 		} catch (Exception e) {
-			throw new Exception("Company failed to get all coupons");
+			throw new Exception("Company " +company.getName()+ " failed to get all coupons");
 		}
 //		return null;
 	}
@@ -203,7 +204,7 @@ public class CompanyService implements Facade {
 //			if (couponRepository.findAll().isEmpty()) {
 //			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
-				throw new Exception("Company failed to get all coupons. Coupons do not exist");
+				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCompanyCouponByType(company.getId(), type);
@@ -211,7 +212,7 @@ public class CompanyService implements Facade {
 				return coupons;
 			}
 		} catch (Exception e) {
-			throw new Exception("Company failed to get all coupons");
+			throw new Exception("Company " +company.getName()+ " failed to get all coupons by type " +type);
 		}
 //		return null;
 	}
@@ -224,7 +225,7 @@ public class CompanyService implements Facade {
 //			if (couponRepository.findAll().isEmpty()) {
 //			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
-				throw new Exception("Company failed to get all coupons. Coupons do not exist");
+				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 //				coupons = couponRepository.findAllByCompanyIdAndPriceLessThanEqual(company.getId(), price);
@@ -238,10 +239,32 @@ public class CompanyService implements Facade {
 				return coupons;
 			}
 		} catch (Exception e) {
-			throw new Exception("Company failed to get all coupons");
+			throw new Exception("Company " +company.getName()+ " failed to get all coupons by price until " +price);
 		}
 //		return null;
 	}
+	
 	//Get Coupon By Date
+	public List<Coupon> getAllCouponsByDate(Date untilDate) throws Exception { //endDate
+		Company company = companyRepository.findById(compId).get();
+		List<Coupon> coupons = null;//
+		try {
+//			if (couponRepository.findAll().isEmpty()) {
+//			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
+			if (company.getCoupons().isEmpty()) {
+				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
+			} else {
+//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
+				coupons = couponRepository.findAllByCompanyIdAndEndDateLessThanEqual(company.getId(), untilDate);
+//				coupons = couponRepository.findCompanyCouponByEndDate(company.getId(), endDate);
+				
+				System.out.println(coupons);
+				return coupons;
+			}
+		} catch (Exception e) {
+			throw new Exception("Company " +company.getName()+ " failed to get all couponsby date until " +untilDate);
+		}
+//		return null;
+	}
 
 }
