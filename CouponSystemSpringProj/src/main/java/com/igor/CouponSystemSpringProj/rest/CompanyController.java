@@ -1,12 +1,15 @@
 package com.igor.CouponSystemSpringProj.rest;
 
+import java.sql.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +31,7 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	
-	
+	//Add Coupon
 	@PostMapping("/addCoupon/{token}")
 	public ResponseEntity<String> createCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token) {
 		ClientSession clientSession = isActive(token);
@@ -44,5 +47,45 @@ public class CompanyController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
+	//Update Coupon
+	@PutMapping("/updateCoupon/{token}/{id}")
+	public ResponseEntity<String> updateCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				companyService.updateCoupon(coupon);
+				return new ResponseEntity<>("Coupon updated ", HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//Delete Coupon
+	@DeleteMapping("/deleteCoupon/{token}/{id}")
+	public ResponseEntity<String> removeCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				companyService.removeCoupon(id);
+				return new ResponseEntity<>("Coupon removed ", HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//View Coupon
+	//View All Coupons
+	//View Coupon By Type
+	//View Coupon By Price
+	//View Coupon By Date
 
 }

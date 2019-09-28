@@ -37,16 +37,12 @@ public class AdminController {
 	
 	
 	//for Company
-
+	//Add Company
 	@PostMapping("/addCompany/{token}")
 	public ResponseEntity<String> createCompany(@RequestBody Company company, @PathVariable("token") String token) {
-//		System.out.println("a1");
 		ClientSession clientSession = isActive(token);
-//		System.out.println("a2");
 //		System.out.println(tokensMap.size());
-//		System.out.println("a3");
 //		System.out.println(clientSession.getFacade()+" "+clientSession.getLastAccessed());
-//		System.out.println("a4");
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
@@ -60,7 +56,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//Update Company
 	@PutMapping("/updateCompany/{token}/{id}")
 	public ResponseEntity<String> updateCompany(@RequestBody Company company, @PathVariable("token") String token, @PathVariable long id) {
 		ClientSession clientSession = isActive(token);
@@ -77,7 +74,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//Delete Company
 	@DeleteMapping("/deleteCompany/{token}/{id}")
 	public ResponseEntity<String> removeCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
@@ -94,7 +92,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//View Company
 	@GetMapping("/viewCompany/{token}/{id}")
 	public ResponseEntity<?> getCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
@@ -110,7 +109,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//View All Companies
 	@GetMapping("/viewAllCompanies/{token}")
 	public ResponseEntity<?> getAllCompanies(@PathVariable String token) {
 		ClientSession clientSession = isActive(token);
@@ -129,7 +129,7 @@ public class AdminController {
 	
 	
 	//for Customer
-
+	//Add Customer
 	@PostMapping("/addCustomer/{token}")
 	public ResponseEntity<String> createCustomer(@RequestBody Customer customer, @PathVariable("token") String token) {
 		ClientSession clientSession = isActive(token);
@@ -146,7 +146,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//Update Customer
 	@PutMapping("/updateCustomer/{token}/{id}")
 	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable("token") String token, @PathVariable long id) {
 		ClientSession clientSession = isActive(token);
@@ -163,7 +164,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//Delete Customer
 	@DeleteMapping("/deleteCustomer/{token}/{id}")
 	public ResponseEntity<String> removeCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
@@ -180,7 +182,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//View Customer
 	@GetMapping("/viewCustomer/{token}/{id}")
 	public ResponseEntity<?> getCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
@@ -196,7 +199,8 @@ public class AdminController {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
 		}
 	}
-
+	
+	//View All Customers
 	@GetMapping("/viewAllCustomers/{token}")
 	public ResponseEntity<?> getAllCustomers(@PathVariable String token) {
 		ClientSession clientSession = isActive(token);

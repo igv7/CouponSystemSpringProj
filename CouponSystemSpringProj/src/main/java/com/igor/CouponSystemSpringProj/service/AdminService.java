@@ -33,7 +33,7 @@ public class AdminService implements Facade {
 	
 	
 	//for CompanyController
-
+	//Create Company
 	public Company createCompany(Company company) throws Exception {
 		try {
 			if (companyRepository.existsById(company.getId())) {
@@ -53,6 +53,7 @@ public class AdminService implements Facade {
 		return company;
 	}
 	
+	//Update Company
 	public Company updateCompany(Company company) throws Exception {
 		Company temp = null;
 		try {
@@ -73,6 +74,7 @@ public class AdminService implements Facade {
 		return temp;
 	}
 	
+	//Remove Company
 	public Company removeCompany(long id) throws Exception {
 		Company temp = null;
 		try {
@@ -97,7 +99,8 @@ public class AdminService implements Facade {
 		}
 		return temp;
 	}
-
+	
+	//Get Company
 	public Company getCompany(long id) throws Exception {
 		Company temp = null;
 		try {
@@ -116,7 +119,8 @@ public class AdminService implements Facade {
 		}
 		return temp;
 	}
-
+	
+	//Get All Companies
 	public List<Company> getAllCompanies() throws Exception {
 		List<Company> companies = null;//
 		try {
@@ -135,7 +139,7 @@ public class AdminService implements Facade {
 	
 	
 	//for CustomerController
-
+	//Create Customer
 	public Customer createCustomer(Customer customer) throws Exception {
 		try {
 			if (customerRepository.existsById(customer.getId())) {
@@ -155,6 +159,7 @@ public class AdminService implements Facade {
 		return customer;
 	}
 	
+	//Update Customer
 	public Customer updateCustomer(Customer customer) throws Exception {
 		Customer temp = null;
 		try {
@@ -174,6 +179,7 @@ public class AdminService implements Facade {
 		return temp;
 	}
 	
+	//Remove Customer
 	public Customer removeCustomer(long id) throws Exception {
 		Customer temp = null;
 		try {
@@ -198,7 +204,8 @@ public class AdminService implements Facade {
 		}
 		return temp;
 	}
-
+	
+	//Get Customer
 	public Customer getCustomer(long id) throws Exception {
 		Customer temp = null;
 		try {
@@ -217,7 +224,8 @@ public class AdminService implements Facade {
 		}
 		return temp;
 	}
-
+	
+	//Get All Customers
 	public List<Customer> getAllCustomers() throws Exception {
 		List<Customer> customers = null;//
 		try {
