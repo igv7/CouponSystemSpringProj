@@ -255,7 +255,7 @@ public class CompanyService implements Facade {
 				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
-				coupons = couponRepository.findAllByCompanyIdAndEndDateLessThanEqual(company.getId(), untilDate);
+				coupons = couponRepository.findAllByIdAndEndDateLessThanEqual(company.getId(), untilDate);
 //				coupons = couponRepository.findCompanyCouponByEndDate(company.getId(), endDate);
 				
 				System.out.println(coupons);
