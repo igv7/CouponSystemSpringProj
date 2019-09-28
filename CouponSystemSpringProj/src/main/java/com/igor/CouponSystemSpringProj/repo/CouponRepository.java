@@ -19,6 +19,14 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
 //	public boolean findCompanyCoupon(boolean b);
 	
+	public List<Coupon> findAllById(long id); 
+	
+	public List<Coupon> findAllByIdAndType(long id, CouponType type);
+	
+	public List<Coupon> findAllByIdAndPriceLessThanEqual(long id, double priceTop);
+	
+	public List<Coupon> findAllByIdAndEndDateLessThanEqual(long id, Date untilDate);
+	
 	
 	
 	//for CompanyService
@@ -36,18 +44,6 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
 	
 	
-	
-	public List<Coupon> findAllById(long id); 
-	
-	public List<Coupon> findAllByIdAndType(long id, CouponType type);
-	
-	public List<Coupon> findAllByIdAndPriceLessThanEqual(long id, double priceTop);
-	
-	public List<Coupon> findAllByIdAndEndDateLessThanEqual(long id, Date untilDate);
-		
-		
-	
-	
 	//for CustomerService
 	@Query("SELECT c from Customer as customer join customer.coupons As c WHERE customer.id=:id")
 	public List<Coupon> findCustomerCoupon(long id);
@@ -58,6 +54,8 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	@Query("SELECT c from Customer as customer join customer.coupons As c WHERE customer.id=:id AND c.price=:price")
 	public List<Coupon> findCustomerCouponByPrice(long id, double price);
 
+	
+	
 	
 	//for Expired Coupons
 	@Query("SELECT c from Coupon As c WHERE c.endDate <= CURRENT_DATE")

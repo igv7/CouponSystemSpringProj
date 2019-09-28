@@ -50,7 +50,7 @@ public class CompanyService implements Facade {
 						throw new Exception("Company failed to add coupon - wrong amount: " + coupon.getAmount());
 					} else {
 						if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
-							throw new Exception("Company failed to add coupon - the end date already passed. " + coupon.getAmount());
+							throw new Exception("Company failed to add coupon - the end date already passed. " + coupon.getEndDate());
 						} else {
 							couponRepository.save(coupon);
 							Company company = companyRepository.findById(compId).get();
@@ -228,7 +228,7 @@ public class CompanyService implements Facade {
 				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
-//				coupons = couponRepository.findAllByCompanyIdAndPriceLessThanEqual(company.getId(), price);
+//				coupons = couponRepository.findAllByIdAndPriceLessThanEqual(company.getId(), price);
 				coupons = couponRepository.findCompanyCouponByPrice(company.getId(), price);
 				for (Coupon coupon: coupons) {
 					if (coupon.getPrice() <= price) {
