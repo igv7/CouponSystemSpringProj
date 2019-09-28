@@ -64,4 +64,5 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	public List<Coupon> findExpiredCoupons();
 		
 		
+	
 }
