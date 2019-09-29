@@ -45,12 +45,14 @@ public class CouponSystem {
 
 	@PostConstruct
 	public void init() {
+		System.out.println("Coupon Cleaner Daily Task in ACTION...");
 		task.start();
 		sessionTask.start();
 	}
 
 	@PreDestroy
 	public void destroy() {
+		System.out.println("The system is shut down.");
 		task.stop();
 		sessionTask.stop();
 	}

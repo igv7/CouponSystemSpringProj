@@ -36,7 +36,7 @@ public class CouponCleanerDailyTask {
 						removeCoupon(coupon);
 					}
 					try {
-						Thread.sleep(1000*60*60*24);//(2000)
+						Thread.sleep(2000);//(1000*60*60*24)
 					} catch (Exception e) {
 						// TODO: handle exception
 						System.out.println("Error on delete Expired Coupons" +e.getMessage());

@@ -17,7 +17,7 @@ public class CouponSystemSpringProjApplication {
 	public static void main(String[] args) {
 //		ConfigurableApplicationContext context = SpringApplication.run(CouponSystemSpringProjApplication.class, args);
 		SpringApplication.run(CouponSystemSpringProjApplication.class, args);
-		System.out.println("Welcome to Coupon System!!!");
+		System.out.println("Welcome to Coupon System!");
 	}
 	
 //	@Bean
