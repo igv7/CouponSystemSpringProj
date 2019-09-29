@@ -56,6 +56,14 @@ public enum CouponType {
 	    public String toString() {
 	      return "Traveling";
 		}
+	},
+	
+	DRINKS
+	{
+		@Override
+	    public String toString() {
+	      return "Drinks";
+		}
 	}
 
 }
