@@ -70,22 +70,23 @@ public class CompanyService implements Facade {
 	//Update Coupon
 	public Coupon updateCoupon(Coupon coupon) throws CouponSystemException {
 		//check if coupon exists
-		coupon = null;
+		Coupon temp = null;
 		Optional<Coupon> optional = couponRepository.findById(coupon.getId());
 		if (!optional.isPresent()) {
 			throw new CouponSystemException("Coupon does not exist");
 		} else {
-			coupon = optional.get();
+			temp = optional.get();
 		}
 		try {
-			coupon.setEndDate(coupon.getEndDate());
-			coupon.setPrice(coupon.getPrice());
+			temp.setEndDate(coupon.getEndDate());
+			temp.setPrice(coupon.getPrice());
 			//update
-			couponRepository.save(coupon);
+			couponRepository.save(temp);
+			System.out.println("Success to update Coupon: "+temp);
 		} catch (Exception e) {
 			throw new CouponSystemException("Could not update coupon endDate! ", e);
 		}
-		return coupon;
+		return temp;
 	}
 	
 //	public Coupon updateCouponEndDate(long id, Date endDate) throws CouponSystemException {

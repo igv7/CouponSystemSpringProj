@@ -5,6 +5,7 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.igor.CouponSystemSpringProj.enums.ClientType;
@@ -21,6 +22,9 @@ import com.igor.CouponSystemSpringProj.task.SessionTimeoutHandler;
 
 @Service
 public class CouponSystem {
+	
+//	@Autowired
+//	private ConfigurableApplicationContext context;
 	
 	@Autowired
 	private ApplicationContext context;
@@ -55,6 +59,7 @@ public class CouponSystem {
 		System.out.println("The system is shut down.");
 		task.stop();
 		sessionTask.stop();
+//		context.close();
 	}
 
 	public Facade login(String userName, String password, ClientType type) throws Exception { //throws CouponSystemException
