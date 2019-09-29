@@ -15,7 +15,9 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	
 	public boolean existsByTitle(String title);
 	
-	public Coupon deleteCouponsById(long id);
+//	public Coupon deleteCouponsById(long id);
+	
+	public List<Coupon> deleteCouponsById(long id);
 	
 //	public boolean findCompanyCoupon(boolean b);
 	

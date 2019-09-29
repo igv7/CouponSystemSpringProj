@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.igor.CouponSystemSpringProj.exceptions.ObjectNotFoundException;
 import com.igor.CouponSystemSpringProj.model.Company;
+import com.igor.CouponSystemSpringProj.model.Coupon;
 import com.igor.CouponSystemSpringProj.model.Customer;
 import com.igor.CouponSystemSpringProj.repo.CompanyRepository;
 import com.igor.CouponSystemSpringProj.repo.CouponRepository;
@@ -76,6 +77,7 @@ public class AdminService implements Facade {
 	
 	//Remove Company
 	public Company removeCompany(long id) throws Exception {
+		List<Coupon> coupons = couponRepository.findAll();
 		Company temp = null;
 		try {
 			Optional<Company> optional = companyRepository.findById(id);
@@ -84,10 +86,11 @@ public class AdminService implements Facade {
 			} else {
 				temp = optional.get();
 				couponRepository.deleteCouponsById(temp.getId());//id    //deleteByCompanyId
-				companyRepository.deleteById(temp.getId());//id
+				couponRepository.saveAll(coupons);
+				companyRepository.deleteById(id);//temp.getId()
 //				serviceStatus.setSuccess(true);
 //				serviceStatus.setMessage("Success, Admin removed company successfully. company id: " + id);
-				System.out.println("Admin removed company successfully. company id: " + id);
+				System.out.println("Admin removed company successfully. company id: " +id+ " company name: " +temp.getName());
 //				return serviceStatus;
 			}
 		} catch (ObjectNotFoundException e) {
@@ -181,6 +184,7 @@ public class AdminService implements Facade {
 	
 	//Remove Customer
 	public Customer removeCustomer(long id) throws Exception {
+		List<Coupon> coupons = couponRepository.findAll();//
 		Customer temp = null;
 		try {
 			Optional<Customer> optional = customerRepository.findById(id);
@@ -189,6 +193,7 @@ public class AdminService implements Facade {
 			} else {
 				temp = optional.get();
 				couponRepository.deleteCouponsById(temp.getId());//id    //deleteByCustomerId
+				couponRepository.saveAll(coupons);//
 				customerRepository.deleteById(temp.getId());//id
 //				serviceStatus.setSuccess(true);
 //				serviceStatus.setMessage("Success, Admin removed customer successfully. customer id: " + id);

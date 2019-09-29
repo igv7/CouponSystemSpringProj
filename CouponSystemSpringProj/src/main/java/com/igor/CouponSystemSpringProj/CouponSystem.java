@@ -59,6 +59,7 @@ public class CouponSystem {
 		switch (type) {
 		case ADMIN:
 			if (userName.equals("admin") && password.equals("1234")) {
+				System.out.println("Welcome Admin! You're logged in system");
 				return adminService;
 			}
 		case COMPANY:
@@ -66,6 +67,7 @@ public class CouponSystem {
 			if (company != null) {
 				CompanyService companyService = context.getBean(CompanyService.class);
 				companyService.setCompId(company.getId());
+				System.out.println("Welcome " +company.getName()+ " company! You're logged in system");
 				return companyService;
 			}
 		case CUSTOMER:
@@ -73,6 +75,7 @@ public class CouponSystem {
 			if (customer != null) {
 				CustomerService customerService = context.getBean(CustomerService.class);
 				customerService.setCustId(customer.getId());
+				System.out.println("Welcome customer " +customer.getName()+ "! You're logged in system");
 				return customerService;
 			}
 		}
