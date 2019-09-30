@@ -35,13 +35,13 @@ public class CustomerController {
 	
 	//Purchase Coupon
 	@PostMapping("/purchaseCoupon/{token}/{id}")
-	public ResponseEntity<String> purchaseCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<?> purchaseCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				customerService.purchaseCoupon(id);
-				return new ResponseEntity<>("Success. Coupon purchased by customer ", HttpStatus.OK);
+//				customerService.purchaseCoupon(id);
+				return new ResponseEntity<>(customerService.purchaseCoupon(id), HttpStatus.OK); //"Success. Coupon purchased by customer"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}

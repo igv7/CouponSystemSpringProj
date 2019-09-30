@@ -57,9 +57,9 @@ public class CustomerService implements Facade {
 
 	// Purchase Coupon
 	public Coupon purchaseCoupon(long id) throws Exception {
-		Customer customer = customerRepository.findById(custId).get();//
+//		Customer customer = customerRepository.findById(custId).get();//
 //		Coupon coupon = couponRepository.getOne(id);//
-		Coupon coupon = couponRepository.findById(id).get();
+//		Coupon coupon = couponRepository.findById(id).get();
 		Optional<Coupon> optional = couponRepository.findById(id);
 		try {
 			if (!optional.isPresent()) {
@@ -88,18 +88,18 @@ public class CustomerService implements Facade {
 //						+ " - already purchased same coupon. ");
 //			}
 			
-			if (coupon.getAmount() < 1) {
-				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-						+ " - wrong amount: " + coupon.getAmount());
-			}
-			if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
-				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-						+ " - this coupon has expired: " + coupon.getEndDate());
-			}
+//			if (coupon.getAmount() < 1) {
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+//						+ " - wrong amount: " + coupon.getAmount());
+//			}
+//			if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+//						+ " - this coupon has expired: " + coupon.getEndDate());
+//			}
 			if (optional.isPresent()) {
-				coupon = couponRepository.getOne(id);
+				Coupon coupon = couponRepository.getOne(id);
 				if (coupon.getAmount() > 0) {
-					customer = customerRepository.getOne(custId);
+					Customer customer = customerRepository.getOne(custId);
 					coupon.setAmount(coupon.getAmount() - 1);
 					customer.getCoupons().add(coupon);
 					customerRepository.save(customer);
