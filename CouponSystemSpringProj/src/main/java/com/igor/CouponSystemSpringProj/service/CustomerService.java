@@ -159,8 +159,13 @@ public class CustomerService implements Facade {
 					throw new Exception(
 							"Customer failed to purchase coupon - the end date already passed. " + coupon.getEndDate());
 				}
-					System.out.println("2");
-					if (customer.getCoupons().contains(coupon)) {
+//					System.out.println("2");
+//					if (customer.getCoupons().contains(coupon)) {
+//						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+//								+ " - already purchased same coupon. ");
+//					} 
+					System.out.println("2a");
+					if (getAllPurchasedCoupons().contains(coupon)) {
 						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 								+ " - already purchased same coupon. ");
 					} 
