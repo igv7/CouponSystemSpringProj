@@ -35,7 +35,7 @@ public class CustomerController {
 	
 	//Purchase Coupon
 	@PostMapping("/purchaseCoupon/{token}/{id}")
-	public ResponseEntity<String> purchaseCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<String> purchaseCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());

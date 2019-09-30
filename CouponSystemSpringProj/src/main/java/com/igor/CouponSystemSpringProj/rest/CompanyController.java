@@ -71,7 +71,7 @@ public class CompanyController {
 	
 	//Delete Coupon
 	@DeleteMapping("/deleteCoupon/{token}/{id}")
-	public ResponseEntity<String> removeCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<String> removeCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
@@ -88,7 +88,7 @@ public class CompanyController {
 	
 	//View Coupon
 	@GetMapping("/viewCoupon/{token}/{id}")
-	public ResponseEntity<?> getCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<?> getCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
@@ -118,7 +118,7 @@ public class CompanyController {
 		}
 	}
 	
-	//View Coupon By Type
+	//View All Coupons By Type
 	@GetMapping("/viewAllCouponsByType/{token}/{type}")
 	public ResponseEntity<?> getAllCouponsByType(@PathVariable("token") String token, @PathVariable("type") CouponType type) {
 		ClientSession clientSession = isActive(token);
@@ -134,7 +134,7 @@ public class CompanyController {
 		}
 	}
 	
-	//View Coupon By Price
+	//View All Coupons By Price
 	@GetMapping("/viewAllCouponsByPrice/{token}/{price}")
 	public ResponseEntity<?> getAllCouponsByPrice(@PathVariable("token") String token, @PathVariable("price") double price) {
 		ClientSession clientSession = isActive(token);
@@ -150,14 +150,14 @@ public class CompanyController {
 		}
 	}
 	
-	//View Coupon By Date
-	@GetMapping("/viewAllCouponsByDate/{token}/{untilDate}")
-	public ResponseEntity<?> getAllCouponsByDate(@PathVariable("token") String token, @PathVariable("untilDate") Date untilDate) {
+	//View All Coupons By Date
+	@GetMapping("/viewAllCouponsByDate/{token}/{endDate}")
+	public ResponseEntity<?> getAllCouponsByDate(@PathVariable("token") String token, @PathVariable("endDate") Date endDate) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				return new ResponseEntity<> (companyService.getAllCouponsByDate(untilDate), HttpStatus.OK);
+				return new ResponseEntity<> (companyService.getAllCouponsByDate(endDate), HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}

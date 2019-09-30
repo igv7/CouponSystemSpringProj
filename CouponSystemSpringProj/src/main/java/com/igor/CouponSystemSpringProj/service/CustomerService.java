@@ -64,10 +64,28 @@ public class CustomerService implements Facade {
 			if (!optional.isPresent()) {
 				throw new Exception("This coupon id " + id + " does not exist in data. ");
 			}
-			if (couponRepository.findCustomerCoupon(customer.getId()).equals(optional.get())) { // id instead of optional.get()?
-				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-						+ " - already purchased same coupon. ");
-			}
+			
+//			if (couponRepository.findCustomerCoupon(customer.getId()).equals(optional.get())) { // id instead of optional.get()?
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+//						+ " - already purchased same coupon. ");
+//			}
+//			if (couponRepository.findById(customer.getId()).get().equals(optional.get())) {
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+//						+ " - already purchased same coupon. ");
+//			}
+			
+//			if (coupon.getId() == id) {
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + id
+//						+ " - already purchased same coupon. ");
+//			}
+//			if (coupon.getTitle()==((Coupon) couponRepository.findCustomerCoupon(customer.getId())).getTitle()) {
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + id
+//						+ " - already purchased same coupon. ");
+//			}
+//			if (((Coupon) couponRepository.findCustomerCoupon(customer.getId())).getTitle().equals(coupon.getTitle())) {
+//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + coupon.getTitle()
+//						+ " - already purchased same coupon. ");
+//			}
 			if (coupon.getAmount() < 1) {
 				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 						+ " - wrong amount: " + coupon.getAmount());

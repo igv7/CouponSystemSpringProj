@@ -38,10 +38,10 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 	@Query("SELECT c from Company as company join company.coupons As c WHERE company.id=:id AND c.type=:type")
 	public List<Coupon> findCompanyCouponByType(long id, CouponType type);
 		
-	@Query("SELECT c from Company as company join company.coupons As c WHERE company.id=:id AND c.price=:price")
+	@Query("SELECT c from Company as company join company.coupons As c WHERE company.id=:id AND c.price<=:price")
 	public List<Coupon> findCompanyCouponByPrice(long id, double price);
 		
-	@Query("SELECT c from Company as company join company.coupons As c WHERE company.id=:id AND c.endDate=:endDate")
+	@Query("SELECT c from Company as company join company.coupons As c WHERE company.id=:id AND c.endDate<=:endDate")
 	public List<Coupon> findCompanyCouponByEndDate(long id, Date endDate);
 	
 	
