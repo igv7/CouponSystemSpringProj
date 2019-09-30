@@ -58,7 +58,8 @@ public class CustomerService implements Facade {
 	// Purchase Coupon
 	public Coupon purchaseCoupon(long id) throws Exception {
 		Customer customer = customerRepository.findById(custId).get();//
-		Coupon coupon = couponRepository.getOne(id);//
+//		Coupon coupon = couponRepository.getOne(id);//
+		Coupon coupon = couponRepository.findById(id).get();
 		Optional<Coupon> optional = couponRepository.findById(id);
 		try {
 			if (!optional.isPresent()) {
@@ -86,6 +87,7 @@ public class CustomerService implements Facade {
 //				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + coupon.getTitle()
 //						+ " - already purchased same coupon. ");
 //			}
+			
 			if (coupon.getAmount() < 1) {
 				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 						+ " - wrong amount: " + coupon.getAmount());
@@ -167,12 +169,12 @@ public class CustomerService implements Facade {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 //				coupons = couponRepository.findAllByIdAndPriceLessThanEqual(customer.getId(), price);
 				coupons = couponRepository.findCustomerCouponByPrice(customer.getId(), price);
-				for (Coupon coupon: coupons) {
-					if (coupon.getPrice() <= price) {
-						System.out.println(coupon);
-					}
-				}
-//				System.out.println(coupons);
+//				for (Coupon coupon: coupons) {
+//					if (coupon.getPrice() <= price) {
+//						System.out.println(coupon);
+//					}
+//				}
+				System.out.println(coupons);
 				return coupons;
 			}
 		} catch (Exception e) {
