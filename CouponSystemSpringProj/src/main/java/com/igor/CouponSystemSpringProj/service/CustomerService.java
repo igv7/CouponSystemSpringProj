@@ -28,7 +28,6 @@ public class CustomerService implements Facade {
 		this.custId = custId;
 	}
 
-
 	@Autowired
 	private CustomerRepository customerRepository;
 
@@ -55,62 +54,136 @@ public class CustomerService implements Facade {
 //		}
 //	}
 
+//	// Purchase Coupon
+//	public Coupon purchaseCoupon(long id) throws Exception {
+//		Customer customer = customerRepository.findById(custId).get();//
+////		Coupon coupon = couponRepository.getOne(id);//
+////		Coupon coupon = couponRepository.findById(id).get();
+//		Optional<Coupon> optional = couponRepository.findById(id);
+//		try {
+//			Coupon coupon = optional.get();
+//			if (!optional.isPresent()) {
+//				throw new Exception("This coupon id " + id + " does not exist in data. ");
+//			} else {
+//				if (couponRepository.existsByTitle(coupon.getTitle())) {
+//					throw new Exception("Customer failed to purchase coupon " + coupon.getTitle()
+//							+ " - this coupon  already purchased by customer");
+//				} else {
+//					if (coupon.getAmount() < 1) {
+//						throw new Exception("Customer failed to purchase coupon - wrong amount: " + coupon.getAmount());
+//					} else {
+//						if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
+//							throw new Exception("Customer failed to purchase coupon - the end date already passed. "
+//									+ coupon.getEndDate());
+//						} else {
+//
+//							if (customer.getCoupons().contains(coupon)) {
+//								throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: "
+//										+ id + " - already purchased same coupon. ");
+//							} else {
+////			if (couponRepository.findCustomerCoupon(customer.getId()).equals(optional.get())) { // id instead of optional.get()?
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+////						+ " - already purchased same coupon. ");
+////			}
+////			if (couponRepository.findById(customer.getId()).get().equals(optional.get())) {
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+////						+ " - already purchased same coupon. ");
+////			}
+//
+////			if (coupon.getId() == id) {
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + id
+////						+ " - already purchased same coupon. ");
+////			}
+////			if (coupon.getTitle()==((Coupon) couponRepository.findCustomerCoupon(customer.getId())).getTitle()) {
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + id
+////						+ " - already purchased same coupon. ");
+////			}
+////			if (((Coupon) couponRepository.findCustomerCoupon(customer.getId())).getTitle().equals(coupon.getTitle())) {
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + coupon.getTitle()
+////						+ " - already purchased same coupon. ");
+////			}
+//
+////			if (coupon.getAmount() < 1) {
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+////						+ " - wrong amount: " + coupon.getAmount());
+////			}
+////			if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
+////				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+////						+ " - this coupon has expired: " + coupon.getEndDate());
+////			}
+//								if (optional.isPresent()) {
+//									coupon = couponRepository.getOne(id);
+//									if (coupon.getAmount() > 0) {
+//										customer = customerRepository.getOne(custId);
+//										coupon.setAmount(coupon.getAmount() - 1);
+//										customer.getCoupons().add(coupon);
+//										customerRepository.save(customer);
+//										couponRepository.save(coupon);
+//										System.out.println("Coupon id: " + coupon.getId() + " title: "
+//												+ coupon.getTitle() + " was purchased by Customer id: "
+//												+ customer.getId() + " name: " + customer.getName());
+//										return coupon;
+//									}
+//
+//								} 
+////								else {
+////									throw new Exception("Coupon does not exixts");
+////								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		} catch (Exception e) {
+//			throw new Exception("Failed to purchase coupon!");
+//		}
+//		return null;
+//
+//	}
+
 	// Purchase Coupon
 	public Coupon purchaseCoupon(long id) throws Exception {
-//		Customer customer = customerRepository.findById(custId).get();//
-//		Coupon coupon = couponRepository.getOne(id);//
-//		Coupon coupon = couponRepository.findById(id).get();
+		Customer customer = customerRepository.findById(custId).get();//
+//			Coupon coupon = couponRepository.getOne(id);//
+//			Coupon coupon = couponRepository.findById(id).get();
+		Coupon coupon = null;
 		Optional<Coupon> optional = couponRepository.findById(id);
 		try {
-			if (!optional.isPresent()) {
-				throw new Exception("This coupon id " + id + " does not exist in data. ");
-			}
-			
-//			if (couponRepository.findCustomerCoupon(customer.getId()).equals(optional.get())) { // id instead of optional.get()?
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-//						+ " - already purchased same coupon. ");
-//			}
-//			if (couponRepository.findById(customer.getId()).get().equals(optional.get())) {
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-//						+ " - already purchased same coupon. ");
-//			}
-			
-//			if (coupon.getId() == id) {
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + id
-//						+ " - already purchased same coupon. ");
-//			}
-//			if (coupon.getTitle()==((Coupon) couponRepository.findCustomerCoupon(customer.getId())).getTitle()) {
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + id
-//						+ " - already purchased same coupon. ");
-//			}
-//			if (((Coupon) couponRepository.findCustomerCoupon(customer.getId())).getTitle().equals(coupon.getTitle())) {
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon title: " + coupon.getTitle()
-//						+ " - already purchased same coupon. ");
-//			}
-			
-//			if (coupon.getAmount() < 1) {
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-//						+ " - wrong amount: " + coupon.getAmount());
-//			}
-//			if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
-//				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-//						+ " - this coupon has expired: " + coupon.getEndDate());
-//			}
-			if (optional.isPresent()) {
-				Coupon coupon = couponRepository.getOne(id);
-				if (coupon.getAmount() > 0) {
-					Customer customer = customerRepository.getOne(custId);
-					coupon.setAmount(coupon.getAmount() - 1);
-					customer.getCoupons().add(coupon);
-					customerRepository.save(customer);
-					couponRepository.save(coupon);
-					System.out.println("Coupon id: " + coupon.getId() + " title: " + coupon.getTitle()
-							+ " was purchased by Customer id: " + customer.getId() + " name: " + customer.getName());
-					return coupon;
-				}
+			coupon = optional.get();
 
+			if (coupon.getAmount() < 1) {
+				throw new Exception("Customer failed to purchase coupon - wrong amount: " + coupon.getAmount());
 			} else {
-				throw new Exception("Coupon does not exixts");
+				if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
+					throw new Exception(
+							"Customer failed to purchase coupon - the end date already passed. " + coupon.getEndDate());
+				} else {
+
+					if (customer.getCoupons().contains(coupon)) {
+						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+								+ " - already purchased same coupon. ");
+					} else {
+
+						if (optional.isPresent()) {
+							coupon = couponRepository.getOne(id);
+							if (coupon.getAmount() > 0) {
+								customer = customerRepository.getOne(custId);
+								coupon.setAmount(coupon.getAmount() - 1);
+								customer.getCoupons().add(coupon);
+								customerRepository.save(customer);
+								couponRepository.save(coupon);
+								System.out.println("Coupon id: " + coupon.getId() + " title: " + coupon.getTitle()
+										+ " was purchased by Customer id: " + customer.getId() + " name: "
+										+ customer.getName());
+								return coupon;
+							}
+
+						} else {
+							throw new Exception("Coupon does not exixts");
+						}
+
+					}
+				}
 			}
 		} catch (Exception e) {
 			throw new Exception("Failed to purchase coupon!");
@@ -125,7 +198,8 @@ public class CustomerService implements Facade {
 		List<Coupon> coupons = null;
 		try {
 			if (customer.getCoupons().isEmpty()) {
-				throw new Exception("Customer " +customer.getName()+ " failed to get all purchased coupons. Coupons do not exist");
+				throw new Exception("Customer " + customer.getName()
+						+ " failed to get all purchased coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCustomerCoupon(customer.getId());
@@ -133,10 +207,10 @@ public class CustomerService implements Facade {
 				return coupons;
 			}
 		} catch (Exception e) {
-			throw new Exception("Customer " +customer.getName()+ " failed to get all purchased coupons");
+			throw new Exception("Customer " + customer.getName() + " failed to get all purchased coupons");
 		}
 	}
-	
+
 	// Get All Purchased Coupons By Type
 	public List<Coupon> getAllPurchasedCouponsByType(CouponType type) throws Exception {
 		Customer customer = customerRepository.findById(custId).get();
@@ -144,7 +218,8 @@ public class CustomerService implements Facade {
 		try {
 //			if (couponRepository.findAll().isEmpty()) {
 			if (customer.getCoupons().isEmpty()) {
-				throw new Exception("Customer " +customer.getName()+ " failed to get all purchased coupons. Coupons do not exist");
+				throw new Exception("Customer " + customer.getName()
+						+ " failed to get all purchased coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCustomerCouponByType(customer.getId(), type);
@@ -152,11 +227,12 @@ public class CustomerService implements Facade {
 				return coupons;
 			}
 		} catch (Exception e) {
-			throw new Exception("Customer " +customer.getName()+ " failed to get all purchased coupons by type " +type);
+			throw new Exception(
+					"Customer " + customer.getName() + " failed to get all purchased coupons by type " + type);
 		}
 
 	}
-	
+
 	// Get All Purchased Coupons By Price
 	public List<Coupon> getAllPurchasedCouponsByPrice(double price) throws Exception {
 		Customer customer = customerRepository.findById(custId).get();
@@ -164,7 +240,8 @@ public class CustomerService implements Facade {
 		try {
 //			if (couponRepository.findAll().isEmpty()) {
 			if (customer.getCoupons().isEmpty()) {
-				throw new Exception("Customer " +customer.getName()+ " failed to get all purchased coupons. Coupons do not exist");
+				throw new Exception("Customer " + customer.getName()
+						+ " failed to get all purchased coupons. Coupons do not exist");
 			} else {
 //				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 //				coupons = couponRepository.findAllByIdAndPriceLessThanEqual(customer.getId(), price);
@@ -178,7 +255,8 @@ public class CustomerService implements Facade {
 				return coupons;
 			}
 		} catch (Exception e) {
-			throw new Exception("Customer " +customer.getName()+ " failed to get all coupons by price until " +price);
+			throw new Exception(
+					"Customer " + customer.getName() + " failed to get all coupons by price until " + price);
 		}
 
 	}
