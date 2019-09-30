@@ -41,16 +41,16 @@ public class AdminController {
 	//for Company
 	//Add Company
 	@PostMapping("/addCompany/{token}")
-	public ResponseEntity<String> createCompany(@RequestBody Company company, @PathVariable("token") String token) {
+	public ResponseEntity<?> createCompany(@RequestBody Company company, @PathVariable("token") String token) {
 		ClientSession clientSession = isActive(token);
 //		System.out.println(tokensMap.size());
 //		System.out.println(clientSession.getFacade()+" "+clientSession.getLastAccessed());
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.createCompany(company);
+//				adminService.createCompany(company);
 //			((AdminService) clientSession.getFacade()).createCompany(company);
-				return new ResponseEntity<>("Company added", HttpStatus.OK);
+				return new ResponseEntity<>(adminService.createCompany(company), HttpStatus.OK); //"Company added"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -61,14 +61,14 @@ public class AdminController {
 	
 	//Update Company
 	@PutMapping("/updateCompany/{token}/{id}")
-	public ResponseEntity<String> updateCompany(@RequestBody Company company, @PathVariable("token") String token, @PathVariable long id) {
+	public ResponseEntity<?> updateCompany(@RequestBody Company company, @PathVariable("token") String token, @PathVariable long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.updateCompany(company);
+//				adminService.updateCompany(company);
 //			((AdminService) clientSession.getFacade()).updateCompany(company);
-				return new ResponseEntity<>("Company updated", HttpStatus.OK);
+				return new ResponseEntity<>(adminService.updateCompany(company), HttpStatus.OK); //"Company updated"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -79,14 +79,14 @@ public class AdminController {
 	
 	//Delete Company
 	@DeleteMapping("/deleteCompany/{token}/{id}")
-	public ResponseEntity<String> removeCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<?> removeCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.removeCompany(id);
+//				adminService.removeCompany(id);
 //			((AdminService) clientSession.getFacade()).removeCompany(id);
-				return new ResponseEntity<>("Company removed", HttpStatus.OK);
+				return new ResponseEntity<>(adminService.removeCompany(id), HttpStatus.OK); //"Company removed"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -133,14 +133,14 @@ public class AdminController {
 	//for Customer
 	//Add Customer
 	@PostMapping("/addCustomer/{token}")
-	public ResponseEntity<String> createCustomer(@RequestBody Customer customer, @PathVariable("token") String token) {
+	public ResponseEntity<?> createCustomer(@RequestBody Customer customer, @PathVariable("token") String token) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.createCustomer(customer);
+//				adminService.createCustomer(customer);
 //			((AdminService) clientSession.getFacade()).createCustomer(customer);
-				return new ResponseEntity<>("Customer added", HttpStatus.OK);
+				return new ResponseEntity<>(adminService.createCustomer(customer), HttpStatus.OK); //"Customer added"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -151,14 +151,14 @@ public class AdminController {
 	
 	//Update Customer
 	@PutMapping("/updateCustomer/{token}/{id}")
-	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable("token") String token, @PathVariable long id) {
+	public ResponseEntity<?> updateCustomer(@RequestBody Customer customer, @PathVariable("token") String token, @PathVariable long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.updateCustomer(customer);
+//				adminService.updateCustomer(customer);
 //			((AdminService) clientSession.getFacade()).updateCustomer(customer);
-				return new ResponseEntity<>("Customer updated", HttpStatus.OK);
+				return new ResponseEntity<>(adminService.updateCustomer(customer), HttpStatus.OK); //"Customer updated"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -169,14 +169,14 @@ public class AdminController {
 	
 	//Delete Customer
 	@DeleteMapping("/deleteCustomer/{token}/{id}")
-	public ResponseEntity<String> removeCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<?> removeCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				adminService.removeCustomer(id);
+//				adminService.removeCustomer(id);
 //			((AdminService) clientSession.getFacade()).removeCustomer(id);
-				return new ResponseEntity<>("Customer removed", HttpStatus.OK);
+				return new ResponseEntity<>(adminService.removeCustomer(id), HttpStatus.OK); //"Customer removed"
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}

@@ -37,13 +37,13 @@ public class CompanyController {
 	
 	//Add Coupon
 	@PostMapping("/addCoupon/{token}")
-	public ResponseEntity<String> createCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token) {
+	public ResponseEntity<?> createCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				companyService.createCoupon(coupon);
-				return new ResponseEntity<>("Coupon added ", HttpStatus.OK);
+//				companyService.createCoupon(coupon);
+				return new ResponseEntity<>(companyService.createCoupon(coupon), HttpStatus.OK); //"Coupon added "
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -54,13 +54,13 @@ public class CompanyController {
 	
 	//Update Coupon
 	@PutMapping("/updateCoupon/{token}/{id}")
-	public ResponseEntity<String> updateCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<?> updateCoupon(@RequestBody Coupon coupon, @PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				companyService.updateCoupon(coupon);
-				return new ResponseEntity<>("Coupon updated ", HttpStatus.OK);
+//				companyService.updateCoupon(coupon);
+				return new ResponseEntity<>(companyService.updateCoupon(coupon), HttpStatus.OK); //"Coupon updated "
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
@@ -71,13 +71,13 @@ public class CompanyController {
 	
 	//Delete Coupon
 	@DeleteMapping("/deleteCoupon/{token}/{id}")
-	public ResponseEntity<String> removeCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
+	public ResponseEntity<?> removeCoupon(@PathVariable("token") String token, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
 			try {
-				companyService.removeCoupon(id);
-				return new ResponseEntity<>("Coupon removed ", HttpStatus.OK);
+//				companyService.removeCoupon(id);
+				return new ResponseEntity<>(companyService.removeCoupon(id), HttpStatus.OK); //"Coupon removed "
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
