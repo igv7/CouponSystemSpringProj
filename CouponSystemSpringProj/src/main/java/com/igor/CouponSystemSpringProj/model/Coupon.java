@@ -71,7 +71,7 @@ public class Coupon {
 		this.id = id;
 	}
 
-	@Column(name = "title", updatable = true, nullable = false, unique = true)
+	@Column(name = "title", updatable = false, nullable = false, unique = true)
 	public String getTitle() {
 		return title;
 	}

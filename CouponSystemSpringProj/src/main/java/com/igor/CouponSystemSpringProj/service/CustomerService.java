@@ -53,6 +53,12 @@ public class CustomerService implements Facade {
 //			throw new Exception("Coupon does not exixts");
 //		}
 //	}
+	
+	
+	
+	
+	
+	
 
 //	// Purchase Coupon
 //	public Coupon purchaseCoupon(long id) throws Exception {
@@ -144,6 +150,7 @@ public class CustomerService implements Facade {
 	// Purchase Coupon
 	public Coupon purchaseCoupon(long id) throws Exception {
 		Customer customer = customerRepository.findById(custId).get();//
+		System.out.println(customer);
 		System.out.println(customer.getCoupons());
 		Coupon coupon = null;
 		Optional<Coupon> optional = couponRepository.findById(id);
@@ -159,19 +166,21 @@ public class CustomerService implements Facade {
 					throw new Exception(
 							"Customer failed to purchase coupon - the end date already passed. " + coupon.getEndDate());
 				}
-//					System.out.println("2");
-//					if (customer.getCoupons().contains(coupon)) {
+					System.out.println("2");
+					System.out.println((customer.getCoupons().contains(coupon)));
+//					if (customer.getCoupons().contains(coupon)==true) {
 //						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 //								+ " - already purchased same coupon. ");
 //					} 
 					System.out.println("2a");
-					if (getAllPurchasedCoupons().contains(coupon)) {
-						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-								+ " - already purchased same coupon. ");
-					} 
+					System.out.println(couponRepository.findById(custId).get().equals(coupon));
+//					if (couponRepository.findById(custId).get().equals(coupon)) {
+//						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
+//								+ " - already purchased same coupon. ");
+//					}
 						System.out.println("3");
 						if (optional.isPresent()) {
-//							coupon = couponRepository.getOne(id);
+							coupon = couponRepository.getOne(id);
 							System.out.println("4");
 							if (coupon.getAmount() > 0) {
 								System.out.println("5");
