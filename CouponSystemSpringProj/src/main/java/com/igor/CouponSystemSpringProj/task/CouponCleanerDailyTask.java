@@ -59,6 +59,7 @@ public class CouponCleanerDailyTask {
 			customerRepository.save(customer);
 		}
 		couponRepository.delete(coupon);
+		System.out.println("Coupon id: " +coupon.getId()+ " title: " +coupon.getTitle()+ " removed by Coupon Cleaner Daily Task");
 	}
 	
 	public void stop() {

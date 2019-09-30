@@ -144,50 +144,68 @@ public class CustomerService implements Facade {
 	// Purchase Coupon
 	public Coupon purchaseCoupon(long id) throws Exception {
 		Customer customer = customerRepository.findById(custId).get();//
+		System.out.println(customer.getCoupons());
 //			Coupon coupon = couponRepository.getOne(id);//
 //			Coupon coupon = couponRepository.findById(id).get();
 		Coupon coupon = null;
 		Optional<Coupon> optional = couponRepository.findById(id);
 		try {
 			coupon = optional.get();
+			System.out.println(coupon);
 
 			if (coupon.getAmount() < 1) {
 				throw new Exception("Customer failed to purchase coupon - wrong amount: " + coupon.getAmount());
 			} else {
+				System.out.println("1");
 				if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
 					throw new Exception(
 							"Customer failed to purchase coupon - the end date already passed. " + coupon.getEndDate());
-				} else {
-
-					if (customer.getCoupons().contains(coupon)) {
+				} 
+//				else {
+					System.out.println("2");
+					if (customerRepository.findById(custId).get().getCoupons().contains(coupon)) {
 						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 								+ " - already purchased same coupon. ");
-					} else {
-
+					} 
+//					else {
+						System.out.println("3");
 						if (optional.isPresent()) {
-							coupon = couponRepository.getOne(id);
+//							coupon = couponRepository.getOne(id);
+							System.out.println("4");
 							if (coupon.getAmount() > 0) {
+								System.out.println("5");
 								customer = customerRepository.getOne(custId);
+								System.out.println("6");
 								coupon.setAmount(coupon.getAmount() - 1);
+								System.out.println("7");
 								customer.getCoupons().add(coupon);
+								System.out.println("8");
 								customerRepository.save(customer);
+								System.out.println("9");
 								couponRepository.save(coupon);
+								System.out.println("10");
 								System.out.println("Coupon id: " + coupon.getId() + " title: " + coupon.getTitle()
 										+ " was purchased by Customer id: " + customer.getId() + " name: "
 										+ customer.getName());
 								return coupon;
 							}
-
+							System.out.println("11");
 						} else {
+							System.out.println("12");
 							throw new Exception("Coupon does not exixts");
 						}
-
+						System.out.println("13");
 					}
-				}
-			}
+					System.out.println("14");
+//				}
+				System.out.println("15");
+//			}
+			System.out.println("16");
 		} catch (Exception e) {
+			System.out.println("17");
 			throw new Exception("Failed to purchase coupon!");
 		}
+		System.out.println("18");
 		return null;
 
 	}
