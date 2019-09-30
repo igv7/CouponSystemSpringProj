@@ -145,8 +145,6 @@ public class CustomerService implements Facade {
 	public Coupon purchaseCoupon(long id) throws Exception {
 		Customer customer = customerRepository.findById(custId).get();//
 		System.out.println(customer.getCoupons());
-//			Coupon coupon = couponRepository.getOne(id);//
-//			Coupon coupon = couponRepository.findById(id).get();
 		Coupon coupon = null;
 		Optional<Coupon> optional = couponRepository.findById(id);
 		try {
@@ -155,19 +153,17 @@ public class CustomerService implements Facade {
 
 			if (coupon.getAmount() < 1) {
 				throw new Exception("Customer failed to purchase coupon - wrong amount: " + coupon.getAmount());
-			} else {
+			}
 				System.out.println("1");
 				if (coupon.getEndDate().before(Date.valueOf(LocalDate.now()))) {
 					throw new Exception(
 							"Customer failed to purchase coupon - the end date already passed. " + coupon.getEndDate());
-				} 
-//				else {
+				}
 					System.out.println("2");
-					if (customerRepository.findById(custId).get().getCoupons().contains(coupon)) {
+					if (customer.getCoupons().contains(coupon)) {
 						throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 								+ " - already purchased same coupon. ");
 					} 
-//					else {
 						System.out.println("3");
 						if (optional.isPresent()) {
 //							coupon = couponRepository.getOne(id);
@@ -189,23 +185,12 @@ public class CustomerService implements Facade {
 										+ customer.getName());
 								return coupon;
 							}
-							System.out.println("11");
 						} else {
-							System.out.println("12");
 							throw new Exception("Coupon does not exixts");
 						}
-						System.out.println("13");
-					}
-					System.out.println("14");
-//				}
-				System.out.println("15");
-//			}
-			System.out.println("16");
 		} catch (Exception e) {
-			System.out.println("17");
 			throw new Exception("Failed to purchase coupon!");
 		}
-		System.out.println("18");
 		return null;
 
 	}
