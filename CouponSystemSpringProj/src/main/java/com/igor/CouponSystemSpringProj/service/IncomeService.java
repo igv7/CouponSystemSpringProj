@@ -7,7 +7,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.igor.CouponSystemSpringProj.model.Company;
+import com.igor.CouponSystemSpringProj.model.Customer;
 import com.igor.CouponSystemSpringProj.model.Income;
+import com.igor.CouponSystemSpringProj.repo.CompanyRepository;
+import com.igor.CouponSystemSpringProj.repo.CustomerRepository;
 import com.igor.CouponSystemSpringProj.repo.IncomeRepository;
 
 @Service
@@ -36,6 +40,12 @@ public class IncomeService implements Facade {
 	@Autowired
 	private IncomeRepository incomeRepository;
 	
+	@Autowired
+	private CompanyRepository companyRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
+	
 	
 	public void storeIncome(Income income) throws Exception {
 		try {
@@ -62,13 +72,14 @@ public class IncomeService implements Facade {
 		}
 	}
 	
-	public List<Income> viewIncomeByCompany(long compId) throws Exception { //id
+	public List<Income> viewIncomeByCompany(long id) throws Exception { //compId
+		Company company = companyRepository.findById(compId).get();
 		List<Income> incomesByCompany = null;
 		try {
-			if (incomeRepository.findAllByClientId(compId).isEmpty()) {
+			if (incomeRepository.findAllByClientId(company.getId()).isEmpty()) {
 				throw new Exception("Failed to get all incomes by company! Data is empty.");
 			} else {
-				incomesByCompany = incomeRepository.findAllByClientId(compId);
+				incomesByCompany = incomeRepository.findAllByClientId(company.getId());
 				System.out.println(incomesByCompany);
 				return incomesByCompany;
 			}
@@ -77,13 +88,14 @@ public class IncomeService implements Facade {
 		}
 	}
 	
-	public List<Income> viewIncomeByCustomer(long custId) throws Exception { //id
+	public List<Income> viewIncomeByCustomer(long id) throws Exception { //custId
+		Customer customer = customerRepository.findById(custId).get();
 		List<Income> incomesByCustomer = null;
 		try {
-			if (incomeRepository.findAllByClientId(custId).isEmpty()) {
+			if (incomeRepository.findAllByClientId(customer.getId()).isEmpty()) {
 				throw new Exception("Failed to get all incomes by customer! Data is empty.");
 			} else {
-				incomesByCustomer = incomeRepository.findAllByClientId(custId);
+				incomesByCustomer = incomeRepository.findAllByClientId(customer.getId());
 				System.out.println(incomesByCustomer);
 				return incomesByCustomer;
 			}
