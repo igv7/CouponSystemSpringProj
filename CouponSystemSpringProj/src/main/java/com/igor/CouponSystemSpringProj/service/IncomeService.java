@@ -21,6 +21,18 @@ public class IncomeService implements Facade {
 //		this.incomeId = incomeId;
 //	}
 	
+	private long compId;
+
+	public void setCompId(long compId) {
+		this.compId = compId;
+	}
+	
+	private long custId;
+
+	public void setCustId(long custId) {
+		this.custId = custId;
+	}
+	
 	@Autowired
 	private IncomeRepository incomeRepository;
 	
@@ -31,7 +43,7 @@ public class IncomeService implements Facade {
 			System.out.println("Succsess. Income was stored " +income);
 		} catch (Exception e) {
 			System.out.println("Failed to store income: " + income);
-			e.getMessage();
+			throw new Exception("Failed to store income: " + e.getMessage());
 		}
 	}
 	
@@ -46,10 +58,38 @@ public class IncomeService implements Facade {
 				return incomes;
 			}
 		} catch (Exception e) {
-			throw new Exception("Failed to get all incomes");
+			throw new Exception("Failed to get all incomes " + e.getMessage());
 		}
 	}
 	
+	public List<Income> viewIncomeByCompany(long compId) throws Exception { //id
+		List<Income> incomesByCompany = null;
+		try {
+			if (incomeRepository.findAllByClientId(compId).isEmpty()) {
+				throw new Exception("Failed to get all incomes by company! Data is empty.");
+			} else {
+				incomesByCompany = incomeRepository.findAllByClientId(compId);
+				System.out.println(incomesByCompany);
+				return incomesByCompany;
+			}
+		} catch (Exception e) {
+			throw new Exception("Failed to get all incomes by company " + e.getMessage());
+		}
+	}
 	
+	public List<Income> viewIncomeByCustomer(long custId) throws Exception { //id
+		List<Income> incomesByCustomer = null;
+		try {
+			if (incomeRepository.findAllByClientId(custId).isEmpty()) {
+				throw new Exception("Failed to get all incomes by customer! Data is empty.");
+			} else {
+				incomesByCustomer = incomeRepository.findAllByClientId(custId);
+				System.out.println(incomesByCustomer);
+				return incomesByCustomer;
+			}
+		} catch (Exception e) {
+			throw new Exception("Failed to get all incomes by customer " + e.getMessage());
+		}
+	}
 
 }
