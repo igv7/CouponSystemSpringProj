@@ -34,11 +34,13 @@ public class CouponCleanerDailyTask {
 			@Override
 			public void run() {
 				while (!stop) {
+					
+					System.out.println("About to delete : "+ couponRepository.findExpiredCoupons());
 					for(Coupon coupon : couponRepository.findExpiredCoupons()) {
 						removeCoupon(coupon);
 					}
 					try {
-						Thread.sleep(2000);//(1000*60*60*24)
+						Thread.sleep(1000*30);//(1000*60*60*24)
 					} catch (Exception e) {
 						// TODO: handle exception
 						System.out.println("Error on delete Expired Coupons" +e.getMessage());

@@ -43,7 +43,8 @@ public class CustomerController {
 //				customerService.purchaseCoupon(id);
 				return new ResponseEntity<>(customerService.purchaseCoupon(id), HttpStatus.OK); //"Success. Coupon purchased by customer"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("faild to purchas coupon by customer", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
