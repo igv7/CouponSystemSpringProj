@@ -87,8 +87,8 @@ public class Company {
 		this.email = email;
 	}
 	
-//	@OneToMany()
-	@OneToMany(fetch = FetchType.EAGER)//fetch = FetchType.LAZY//, mappedBy = "company"
+	@OneToMany
+//	@OneToMany(fetch = FetchType.EAGER)//fetch = FetchType.LAZY//, mappedBy = "company"
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}

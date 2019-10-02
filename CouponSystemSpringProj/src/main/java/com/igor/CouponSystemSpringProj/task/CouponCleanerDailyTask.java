@@ -37,7 +37,7 @@ public class CouponCleanerDailyTask {
 					
 					System.out.println("About to delete : "+ couponRepository.findExpiredCoupons());
 					for(Coupon coupon : couponRepository.findExpiredCoupons()) {
-						removeCoupon(coupon);
+							removeCoupon(coupon);
 					}
 					try {
 						Thread.sleep(1000*30);//(1000*60*60*24)
@@ -51,7 +51,23 @@ public class CouponCleanerDailyTask {
 		}).start();
 	}
 	
-	private void removeCoupon(Coupon coupon) {
+//	private void removeCoupon(Coupon coupon) {
+//		Company company = companyRepository.findCompanyByCoupon(coupon.getId());
+//		List<Customer> customers = customerRepository.findCustomersByCoupon(coupon.getId());
+//		if (company != null) {
+//			company.getCoupons().remove(coupon);
+//			companyRepository.save(company);
+//		}
+//		for(Customer customer : customers) {
+//			customer.getCoupons().remove(coupon);
+//			customerRepository.save(customer);
+//		}
+//		couponRepository.delete(coupon);
+//		
+//		System.out.println("Coupon id: " +coupon.getId()+ " title: " +coupon.getTitle()+ " expired and removed by Coupon Cleaner Daily Task");
+//	}
+	
+	private void removeCoupon(Coupon coupon)  {
 		Company company = companyRepository.findCompanyByCoupon(coupon.getId());
 		List<Customer> customers = customerRepository.findCustomersByCoupon(coupon.getId());
 		if (company != null) {
@@ -62,35 +78,9 @@ public class CouponCleanerDailyTask {
 			customer.getCoupons().remove(coupon);
 			customerRepository.save(customer);
 		}
+		
 		couponRepository.delete(coupon);
-		System.out.println("Coupon id: " +coupon.getId()+ " title: " +coupon.getTitle()+ " expired and removed by Coupon Cleaner Daily Task");
 	}
-	
-//	private void removeCoupon(long id) throws CouponSystemException {
-//		Company company = companyRepository.findCompanyByCoupon(id);
-//		List<Customer> customers = customerRepository.findCustomersByCoupon(id);
-//		Coupon coupon = null;
-//		Optional<Coupon> optional = couponRepository.findById(id);
-//		if (!optional.isPresent()) {
-//			throw new CouponSystemException("Coupon does not exist");
-//		} else {
-//			coupon = optional.get();
-//		}
-//		try {
-//		if (company != null) {
-//			company.getCoupons().remove(coupon);
-//			companyRepository.save(company);
-//		}
-//		for(Customer customer : customers) {
-//			customer.getCoupons().remove(coupon);
-//			customerRepository.save(customer);
-//		}
-//		couponRepository.deleteById(id);
-//		System.out.println("Coupon id: " +coupon.getId()+ " title: " +coupon.getTitle()+ " expired and removed by Coupon Cleaner Daily Task");
-//		} catch (Exception e) {
-//			throw new CouponSystemException("Error on delete expired coupons by Coupon Cleaner Daily Task! ", e);
-//		}
-//	}
 	
 	public void stop() {
 		this.stop = true;

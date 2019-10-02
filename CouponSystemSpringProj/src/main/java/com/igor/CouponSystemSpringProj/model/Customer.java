@@ -76,8 +76,8 @@ public class Customer {
 		this.password = password;
 	}
 	
-//	@OneToMany()
-	@OneToMany(fetch = FetchType.EAGER)//fetch = FetchType.LAZY//, mappedBy = "customer"
+	@OneToMany
+//	@OneToMany(fetch = FetchType.EAGER)//fetch = FetchType.LAZY//, mappedBy = "customer"
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}
