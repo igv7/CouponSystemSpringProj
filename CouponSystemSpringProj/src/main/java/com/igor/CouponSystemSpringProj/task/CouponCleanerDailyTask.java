@@ -78,8 +78,8 @@ public class CouponCleanerDailyTask {
 			customer.getCoupons().remove(coupon);
 			customerRepository.save(customer);
 		}
-		
 		couponRepository.delete(coupon);
+		System.out.println("Coupon id: " +coupon.getId()+ " title: " +coupon.getTitle()+ " expired and removed by Coupon Cleaner Daily Task");
 	}
 	
 	public void stop() {

@@ -44,7 +44,7 @@ public class CustomerController {
 				return new ResponseEntity<>(customerService.purchaseCoupon(id), HttpStatus.OK); //"Success. Coupon purchased by customer"
 			} catch (Exception e) {
 				e.getMessage();
-				return new ResponseEntity<>("faild to purchas coupon by customer", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("faild to purchase coupon by customer", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -61,7 +61,8 @@ public class CustomerController {
 //				customerService.getAllPurchasedCoupons();
 				return new ResponseEntity<> (customerService.getAllPurchasedCoupons(), HttpStatus.OK); //"Success on get all purchased coupons"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("faild to view all purchased coupons by customer", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -78,7 +79,8 @@ public class CustomerController {
 //				customerService.getAllPurchasedCouponsByType(type);
 				return new ResponseEntity<> (customerService.getAllPurchasedCouponsByType(type), HttpStatus.OK); //"Success on get customer coupons by type"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("faild to view all purchased coupons by type", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -95,7 +97,8 @@ public class CustomerController {
 //				customerService.getAllPurchasedCouponsByPrice(price);
 				return new ResponseEntity<> (customerService.getAllPurchasedCouponsByPrice(price), HttpStatus.OK); //"Success on get customer coupons by price"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("faild to view all purchased coupons by price", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);

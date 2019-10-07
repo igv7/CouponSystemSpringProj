@@ -52,7 +52,8 @@ public class AdminController {
 //			((AdminService) clientSession.getFacade()).createCompany(company);
 				return new ResponseEntity<>(adminService.createCompany(company), HttpStatus.OK); //"Company added"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to add company by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -70,7 +71,8 @@ public class AdminController {
 //			((AdminService) clientSession.getFacade()).updateCompany(company);
 				return new ResponseEntity<>(adminService.updateCompany(company), HttpStatus.OK); //"Company updated"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to update company by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -88,7 +90,8 @@ public class AdminController {
 //			((AdminService) clientSession.getFacade()).removeCompany(id);
 				return new ResponseEntity<>(adminService.removeCompany(id), HttpStatus.OK); //"Company removed"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to delete company by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -105,7 +108,8 @@ public class AdminController {
 				return new ResponseEntity<> (adminService.getCompany(id), HttpStatus.OK);
 //				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getCompany(), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view company by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -122,7 +126,8 @@ public class AdminController {
 				return new ResponseEntity<> (adminService.getAllCompanies(), HttpStatus.OK);
 //				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getAllCompanies(), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all companies by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -142,7 +147,8 @@ public class AdminController {
 //			((AdminService) clientSession.getFacade()).createCustomer(customer);
 				return new ResponseEntity<>(adminService.createCustomer(customer), HttpStatus.OK); //"Customer added"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to add customer by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -160,7 +166,8 @@ public class AdminController {
 //			((AdminService) clientSession.getFacade()).updateCustomer(customer);
 				return new ResponseEntity<>(adminService.updateCustomer(customer), HttpStatus.OK); //"Customer updated"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to update customer by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -178,7 +185,8 @@ public class AdminController {
 //			((AdminService) clientSession.getFacade()).removeCustomer(id);
 				return new ResponseEntity<>(adminService.removeCustomer(id), HttpStatus.OK); //"Customer removed"
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to delete customer by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -195,7 +203,8 @@ public class AdminController {
 				return new ResponseEntity<> (adminService.getCustomer(id), HttpStatus.OK);
 //				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getCustomer(), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view customer by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
@@ -212,7 +221,8 @@ public class AdminController {
 				return new ResponseEntity<> (adminService.getAllCustomers(), HttpStatus.OK);
 //				return new ResponseEntity<> (((AdminService) clientSession.getFacade()).getAllCustomers(), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all customers by admin", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT

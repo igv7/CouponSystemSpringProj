@@ -45,7 +45,8 @@ public class CompanyController {
 //				companyService.createCoupon(coupon);
 				return new ResponseEntity<>(companyService.createCoupon(coupon), HttpStatus.OK); //"Coupon added "
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to add coupon by company", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -62,7 +63,8 @@ public class CompanyController {
 //				companyService.updateCoupon(coupon);
 				return new ResponseEntity<>(companyService.updateCoupon(coupon), HttpStatus.OK); //"Coupon updated "
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to update coupon by company", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -79,7 +81,8 @@ public class CompanyController {
 //				companyService.removeCoupon(id);
 				return new ResponseEntity<>(companyService.removeCoupon(id), HttpStatus.OK); //"Coupon removed "
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to delete coupon by company", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -95,7 +98,8 @@ public class CompanyController {
 			try {
 				return new ResponseEntity<>(companyService.getCoupon(id), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view company coupon", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -111,7 +115,8 @@ public class CompanyController {
 			try {
 				return new ResponseEntity<> (companyService.getAllCoupons(), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all company coupons", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -127,7 +132,8 @@ public class CompanyController {
 			try {
 				return new ResponseEntity<> (companyService.getAllCouponsByType(type), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all company coupons by type", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -143,7 +149,8 @@ public class CompanyController {
 			try {
 				return new ResponseEntity<> (companyService.getAllCouponsByPrice(price), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all company coupons by price", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
@@ -159,7 +166,8 @@ public class CompanyController {
 			try {
 				return new ResponseEntity<> (companyService.getAllCouponsByDate(endDate), HttpStatus.OK);
 			} catch (Exception e) {
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all company coupons by date", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
