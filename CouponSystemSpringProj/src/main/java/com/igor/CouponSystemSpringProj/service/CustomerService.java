@@ -10,12 +10,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.igor.CouponSystemSpringProj.enums.ClientType;
 import com.igor.CouponSystemSpringProj.enums.CouponType;
+import com.igor.CouponSystemSpringProj.enums.IncomeType;
 import com.igor.CouponSystemSpringProj.model.Coupon;
 import com.igor.CouponSystemSpringProj.repo.CompanyRepository;
 import com.igor.CouponSystemSpringProj.repo.CouponRepository;
 import com.igor.CouponSystemSpringProj.repo.CustomerRepository;
 import com.igor.CouponSystemSpringProj.model.Customer;
+import com.igor.CouponSystemSpringProj.model.Income;
 
 @Service
 //@Scope("prototype")
@@ -33,6 +36,9 @@ public class CustomerService implements Facade {
 
 	@Autowired
 	private CouponRepository couponRepository;
+	
+	@Autowired
+	private IncomeService incomeService;
 
 //	//Purchase Coupon
 //	public boolean purchaseCoupon(long id) throws Exception {
@@ -77,7 +83,6 @@ public class CustomerService implements Facade {
 				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 						+ " - already purchased same coupon. ");
 			}
-//					System.out.println("2a");
 //					System.out.println(getAllPurchasedCoupons().contains(coupon));
 //					if (getAllPurchasedCoupons().contains(coupon)) {
 //					throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
@@ -91,6 +96,13 @@ public class CustomerService implements Facade {
 					customer.getCoupons().add(coupon);
 					customerRepository.save(customer);
 					couponRepository.save(coupon);
+					Income income = new Income();
+					income.setClientId(customer.getId());
+					income.setClientName("Customer " +customer.getName());
+					income.setOperationDate(Date.valueOf(LocalDate.now()));
+					income.setDescription(IncomeType.CUSTOMER_PURCHASE);
+					income.setAmount(coupon.getPrice());
+					incomeService.storeIncome(income);
 					System.out.println("Coupon id: " + coupon.getId() + " title: " + coupon.getTitle()
 							+ " was purchased by Customer id: " + customer.getId() + " name: " + customer.getName());
 					return coupon;

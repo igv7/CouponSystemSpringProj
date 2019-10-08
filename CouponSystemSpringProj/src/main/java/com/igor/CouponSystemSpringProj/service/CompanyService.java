@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.igor.CouponSystemSpringProj.enums.CouponType;
+import com.igor.CouponSystemSpringProj.enums.IncomeType;
 import com.igor.CouponSystemSpringProj.exceptions.CouponSystemException;
 import com.igor.CouponSystemSpringProj.exceptions.ObjectNotFoundException;
 import com.igor.CouponSystemSpringProj.model.Company;
 import com.igor.CouponSystemSpringProj.model.Coupon;
 import com.igor.CouponSystemSpringProj.model.Customer;
+import com.igor.CouponSystemSpringProj.model.Income;
 import com.igor.CouponSystemSpringProj.repo.CompanyRepository;
 import com.igor.CouponSystemSpringProj.repo.CouponRepository;
 import com.igor.CouponSystemSpringProj.repo.CustomerRepository;
@@ -37,6 +39,9 @@ public class CompanyService implements Facade {
 	@Autowired
 	private CouponRepository couponRepository;
 	
+	@Autowired
+	private IncomeService incomeService;
+	
 	//Create Coupon
 	public Coupon createCoupon(Coupon coupon) throws CouponSystemException {
 		try {
@@ -56,6 +61,13 @@ public class CompanyService implements Facade {
 							Company company = companyRepository.findById(compId).get();
 							company.getCoupons().add(coupon);
 							companyRepository.save(company);
+							Income income = new Income();
+							income.setClientId(company.getId()); //compId
+							income.setClientName("Company " + company.getName());
+							income.setOperationDate(Date.valueOf(LocalDate.now()));
+							income.setDescription(IncomeType.COMPANY_NEW_COUPON);
+							income.setAmount(100.0);
+							incomeService.storeIncome(income);
 							System.out.println("Success to add Coupon: "+ coupon);
 						}
 					}
@@ -69,6 +81,7 @@ public class CompanyService implements Facade {
 	
 	//Update Coupon
 	public Coupon updateCoupon(Coupon coupon) throws CouponSystemException {
+		Company company = companyRepository.findById(compId).get();
 		//check if coupon exists
 		Coupon temp = null;
 		Optional<Coupon> optional = couponRepository.findById(coupon.getId());
@@ -82,6 +95,13 @@ public class CompanyService implements Facade {
 			temp.setPrice(coupon.getPrice());
 			//update
 			couponRepository.save(temp);
+			Income income = new Income();
+			income.setClientId(company.getId()); //compId
+			income.setClientName("Company " + company.getName());
+			income.setOperationDate(Date.valueOf(LocalDate.now()));
+			income.setDescription(IncomeType.COMPANY_UPDATE_COUPON);
+			income.setAmount(10.0);
+			incomeService.storeIncome(income);
 			System.out.println("Success to update Coupon: "+temp);
 		} catch (Exception e) {
 			throw new CouponSystemException("Could not update coupon endDate! ", e);

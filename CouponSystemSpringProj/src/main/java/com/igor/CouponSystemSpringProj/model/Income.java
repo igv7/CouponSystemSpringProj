@@ -1,6 +1,7 @@
 package com.igor.CouponSystemSpringProj.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.igor.CouponSystemSpringProj.enums.IncomeType;
 
 //import lombok.Data;
@@ -28,9 +29,10 @@ import com.igor.CouponSystemSpringProj.enums.IncomeType;
 public class Income {
 	
 	private long incomeId;
-	private String clientName;
 	private long clientId;
-	private Date operationDate;
+	private String clientName;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private Date operationDate = Date.valueOf(LocalDate.now());
 	private IncomeType description;
 	private double amount;
 
