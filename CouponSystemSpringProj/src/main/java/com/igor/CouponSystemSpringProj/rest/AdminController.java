@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.igor.CouponSystemSpringProj.model.Company;
 import com.igor.CouponSystemSpringProj.model.Customer;
 import com.igor.CouponSystemSpringProj.service.AdminService;
+import com.igor.CouponSystemSpringProj.service.IncomeService;
 import com.igor.CouponSystemSpringProj.rest.ClientSession;
 
 @RestController
@@ -36,6 +37,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	public IncomeService incomeService;
 	
 	
 	//for Company
@@ -226,6 +230,57 @@ public class AdminController {
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED); // GATEWAY_TIMEOUT
+		}
+	}
+	
+	//View Income By Company
+	@GetMapping("/viewIncomeByCompany/{token}/{id}")
+	public ResponseEntity<?> viewIncomeByCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (incomeService.viewIncomeByCompany(id), HttpStatus.OK);
+			} catch (Exception e) {
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view income by company id: " +id, HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//View Income By Customer
+	@GetMapping("/viewIncomeByCustomer/{token}/{id}")
+	public ResponseEntity<?> viewIncomeByCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (incomeService.viewIncomeByCustomer(id), HttpStatus.OK);
+			} catch (Exception e) {
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view income by customer id: " +id, HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//View All Income
+	@GetMapping("/viewAllIncome/{token}")
+	public ResponseEntity<?> viewIncomeByCustomer(@PathVariable("token") String token) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (incomeService.viewAllIncome(), HttpStatus.OK);
+			} catch (Exception e) {
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view all income ", HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
 		}
 	}
 

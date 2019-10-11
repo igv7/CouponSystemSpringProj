@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.igor.CouponSystemSpringProj.enums.CouponType;
 import com.igor.CouponSystemSpringProj.model.Coupon;
 import com.igor.CouponSystemSpringProj.service.CompanyService;
+import com.igor.CouponSystemSpringProj.service.IncomeService;
 
 @RestController
 @RequestMapping("/company")
@@ -34,6 +35,10 @@ public class CompanyController {
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private IncomeService incomeService;
+	
 	
 	//Add Coupon
 	@PostMapping("/addCoupon/{token}")
@@ -168,6 +173,23 @@ public class CompanyController {
 			} catch (Exception e) {
 				e.getMessage();
 				return new ResponseEntity<>("Failed to view all company coupons by date", HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//View Income By Company
+	@GetMapping("/viewIncomeByCompany/{token}/{id}")
+	public ResponseEntity<?> viewIncomeByCompany(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (incomeService.viewIncomeByCompany(id), HttpStatus.OK);
+			} catch (Exception e) {
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view income by company ", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
