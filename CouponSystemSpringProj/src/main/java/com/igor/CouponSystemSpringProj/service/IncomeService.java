@@ -72,7 +72,7 @@ public class IncomeService implements Facade {
 		}
 	}
 	
-	public List<Income> viewIncomeByCompany(long id) throws Exception { //compId
+	public List<Income> viewIncomeByCompany(long compId) throws Exception { //id
 		Company company = companyRepository.findById(compId).get();
 		List<Income> incomesByCompany = null;
 		try {
@@ -88,7 +88,7 @@ public class IncomeService implements Facade {
 		}
 	}
 	
-	public List<Income> viewIncomeByCustomer(long id) throws Exception { //custId
+	public List<Income> viewIncomeByCustomer(long custId) throws Exception { //id
 		Customer customer = customerRepository.findById(custId).get();
 		List<Income> incomesByCustomer = null;
 		try {

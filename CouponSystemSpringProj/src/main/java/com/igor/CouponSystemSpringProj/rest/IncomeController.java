@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,8 +71,8 @@ public class IncomeController {
 	}
 
 	// View All Income
-	@PostMapping("/viewAllIncome/{token}/{client}")
-	public ResponseEntity<?> viewAllIncome(@RequestBody Income income, @PathVariable("token") String token,
+	@GetMapping("/viewAllIncome/{token}/{client}")
+	public ResponseEntity<?> viewAllIncome(@PathVariable("token") String token,
 			@PathVariable("client") String client) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
@@ -79,8 +80,9 @@ public class IncomeController {
 			try {
 				switch (client) {
 				case "admin":
-					incomeService.viewAllIncome();
-					return new ResponseEntity<>("Success on view all income " + income, HttpStatus.OK);
+//					incomeService.viewAllIncome();
+					System.out.println("Success on view all income ");
+					return new ResponseEntity<>(incomeService.viewAllIncome(), HttpStatus.OK); //"Success on view all income "
 				default:
 					return new ResponseEntity<>("Unauthorized. ", HttpStatus.UNAUTHORIZED);
 				}
@@ -94,7 +96,7 @@ public class IncomeController {
 	}
 
 	// View Income By Company
-	@PostMapping("/viewIncomeByCompany/{id}/{token}/{client}")
+	@GetMapping("/viewIncomeByCompany/{id}/{token}/{client}")
 	public ResponseEntity<?> viewIncomeByCompany(@RequestBody Income income, @PathVariable("token") String token,
 			@PathVariable("client") String client, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
@@ -121,7 +123,7 @@ public class IncomeController {
 	}
 
 	// View Income By Customer
-	@PostMapping("/viewIncomeByCustomer/{id}/{token}/{client}")
+	@GetMapping("/viewIncomeByCustomer/{id}/{token}/{client}")
 	public ResponseEntity<?> viewIncomeByCustomer(@RequestBody Income income, @PathVariable("token") String token,
 			@PathVariable("client") String client, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
