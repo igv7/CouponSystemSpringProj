@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.igor.CouponSystemSpringProj.enums.CouponType;
 import com.igor.CouponSystemSpringProj.model.Coupon;
 import com.igor.CouponSystemSpringProj.service.CustomerService;
+import com.igor.CouponSystemSpringProj.service.IncomeService;
 
 @RestController
 @RequestMapping("/customer")
@@ -31,6 +32,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private IncomeService incomeService;
 	
 	
 	//Purchase Coupon
@@ -99,6 +103,23 @@ public class CustomerController {
 			} catch (Exception e) {
 				e.getMessage();
 				return new ResponseEntity<>("faild to view all purchased coupons by price", HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//View Income By Customer
+	@GetMapping("/viewIncomeByCustomer/{token}/{id}")
+	public ResponseEntity<?> viewIncomeByCustomer(@PathVariable("token") String token, @PathVariable("id") long id) {
+		ClientSession clientSession = isActive(token);
+		if (clientSession != null) {
+			clientSession.setLastAccessed(System.currentTimeMillis());
+			try {
+				return new ResponseEntity<> (incomeService.viewIncomeByCustomer(id), HttpStatus.OK);
+			} catch (Exception e) {
+				e.getMessage();
+				return new ResponseEntity<>("Failed to view income by customer ", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>("Unauthorized. Session Timeout", HttpStatus.UNAUTHORIZED);
