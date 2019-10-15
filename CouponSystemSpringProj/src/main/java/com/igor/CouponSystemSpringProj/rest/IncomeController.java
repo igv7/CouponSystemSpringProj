@@ -72,8 +72,7 @@ public class IncomeController {
 
 	// View All Income
 	@GetMapping("/viewAllIncome/{token}/{client}")
-	public ResponseEntity<?> viewAllIncome(@PathVariable("token") String token,
-			@PathVariable("client") String client) {
+	public ResponseEntity<?> viewAllIncome(@PathVariable("token") String token, @PathVariable("client") String client) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
 			clientSession.setLastAccessed(System.currentTimeMillis());
@@ -82,7 +81,7 @@ public class IncomeController {
 				case "admin":
 //					incomeService.viewAllIncome();
 					System.out.println("Success on view all income ");
-					return new ResponseEntity<>(incomeService.viewAllIncome(), HttpStatus.OK); //"Success on view all income "
+					return new ResponseEntity<>(incomeService.viewAllIncome(), HttpStatus.OK);
 				default:
 					return new ResponseEntity<>("Unauthorized. ", HttpStatus.UNAUTHORIZED);
 				}
@@ -97,7 +96,7 @@ public class IncomeController {
 
 	// View Income By Company
 	@GetMapping("/viewIncomeByCompany/{id}/{token}/{client}")
-	public ResponseEntity<?> viewIncomeByCompany(@RequestBody Income income, @PathVariable("token") String token,
+	public ResponseEntity<?> viewIncomeByCompany(@PathVariable("token") String token,
 			@PathVariable("client") String client, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
@@ -105,11 +104,13 @@ public class IncomeController {
 			try {
 				switch (client) {
 				case "admin":
-					incomeService.viewIncomeByCompany(id);
-					return new ResponseEntity<>("Success on view income by company " + income, HttpStatus.OK);
+//					incomeService.viewIncomeByCompany(id);
+					System.out.println("Admin Success on view income by company ");
+					return new ResponseEntity<>(incomeService.viewIncomeByCompany(id), HttpStatus.OK);
 				case "company":
-					incomeService.viewIncomeByCompany(id);
-					return new ResponseEntity<>("Success on view income by company " + income, HttpStatus.OK);
+//					incomeService.viewIncomeByCompany(id);
+					System.out.println("Company Success on view income by company ");
+					return new ResponseEntity<>(incomeService.viewIncomeByCompany(id), HttpStatus.OK);
 				default:
 					return new ResponseEntity<>("Unauthorized. ", HttpStatus.UNAUTHORIZED);
 				}
@@ -124,7 +125,7 @@ public class IncomeController {
 
 	// View Income By Customer
 	@GetMapping("/viewIncomeByCustomer/{id}/{token}/{client}")
-	public ResponseEntity<?> viewIncomeByCustomer(@RequestBody Income income, @PathVariable("token") String token,
+	public ResponseEntity<?> viewIncomeByCustomer(@PathVariable("token") String token,
 			@PathVariable("client") String client, @PathVariable("id") long id) {
 		ClientSession clientSession = isActive(token);
 		if (clientSession != null) {
@@ -132,11 +133,13 @@ public class IncomeController {
 			try {
 				switch (client) {
 				case "admin":
-					incomeService.viewIncomeByCustomer(id);
-					return new ResponseEntity<>("Success on view income by customer " + income, HttpStatus.OK);
+//					incomeService.viewIncomeByCustomer(id);
+					System.out.println("Admin Success on view income by customer ");
+					return new ResponseEntity<>(incomeService.viewIncomeByCustomer(id), HttpStatus.OK);
 				case "customer":
-					incomeService.viewIncomeByCustomer(id);
-					return new ResponseEntity<>("Success on view income by customer " + income, HttpStatus.OK);
+//					incomeService.viewIncomeByCustomer(id);
+					System.out.println("Customer Success on view income by customer ");
+					return new ResponseEntity<>(incomeService.viewIncomeByCustomer(id), HttpStatus.OK);
 				default:
 					return new ResponseEntity<>("Unauthorized. ", HttpStatus.UNAUTHORIZED);
 				}
