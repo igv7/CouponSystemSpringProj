@@ -18,7 +18,7 @@ import com.igor.CouponSystemSpringProj.rest.ClientSession;
 import com.igor.CouponSystemSpringProj.service.Facade;
 
 @RestController
-@RequestMapping("/CouponSystemSpringProj/api")
+@RequestMapping("/CouponSystemSpringProj")
 @CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 	
