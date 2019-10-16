@@ -18,7 +18,7 @@ import com.igor.CouponSystemSpringProj.rest.ClientSession;
 import com.igor.CouponSystemSpringProj.service.Facade;
 
 @RestController
-//@RequestMapping("/login")
+@RequestMapping("/CouponSystemSpringProj")
 @CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 	
@@ -28,7 +28,7 @@ public class LoginController {
 	@Autowired
 	private CouponSystem couponSystem;
 	
-	@PostMapping("login")
+	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestParam String userName, @RequestParam String password, @RequestParam String type) {
 		if (!type.equals("ADMIN") && !type.equals("COMPANY") && !type.equals("CUSTOMER")) {
 			return new ResponseEntity<>("Wrong type", HttpStatus.UNAUTHORIZED);
