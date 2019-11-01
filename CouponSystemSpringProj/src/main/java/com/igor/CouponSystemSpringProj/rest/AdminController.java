@@ -23,7 +23,7 @@ import com.igor.CouponSystemSpringProj.rest.ClientSession;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class AdminController {
 
 	@Autowired

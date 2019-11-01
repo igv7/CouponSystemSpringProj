@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //import lombok.ToString;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,7 +28,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-//@JsonIgnoreProperties(value = {"coupons"})   //@JsonIgnoreProperties(ignoreUnknown = true, value = {"coupons"})
+//@JsonIgnoreProperties(ignoreUnknown = true, value = {"coupons"})
+@JsonIgnoreProperties(value = {"coupons"})
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
@@ -88,7 +91,7 @@ public class Company {
 	}
 	
 	@OneToMany
-//	@OneToMany(fetch = FetchType.EAGER)//fetch = FetchType.LAZY//, mappedBy = "company"
+//	@OneToMany(fetch = FetchType.LAZY)//fetch = FetchType.EAGER//, mappedBy = "company"
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}

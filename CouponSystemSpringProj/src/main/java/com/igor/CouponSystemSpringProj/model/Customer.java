@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -26,7 +28,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-//@JsonIgnoreProperties(value = {"coupons"})   //@JsonIgnoreProperties(ignoreUnknown = true, value = {"coupons"})
+//@JsonIgnoreProperties(ignoreUnknown = true, value = {"coupons"})
+@JsonIgnoreProperties(value = {"coupons"})
 //@Data
 //@NoArgsConstructor
 //@AllArgsConstructor
