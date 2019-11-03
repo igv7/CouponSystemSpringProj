@@ -18,7 +18,7 @@ public class MyConfiguration {
 				registry
 				.addMapping("/**")
 				.allowedOrigins("http://localhost:4200")
-				.allowedMethods("*");
+				.allowedMethods("*").allowCredentials(true);
 			}
 		};
 	}
