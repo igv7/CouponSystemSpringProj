@@ -39,15 +39,15 @@ public class Coupon {
 	private int amount;
 	private CouponType type;
 	private double price;
-	private String description;
-	private String img;
+	private String message;
+	private String image;
 	
 	public Coupon() {
 		
 	}
 
 	public Coupon(long id, String title, Date startDate, Date endDate, int amount, CouponType type, double price,
-			String description, String img) {
+			String message, String image) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -56,8 +56,8 @@ public class Coupon {
 		this.amount = amount;
 		this.type = type;
 		this.price = price;
-		this.description = description;
-		this.img = img;
+		this.message = message;
+		this.image = image;
 	}
 
 	@Id
@@ -126,29 +126,29 @@ public class Coupon {
 		this.price = price;
 	}
 
-	@Column(name = "description", updatable = true, nullable = false)
-	public String getDescription() {
-		return description;
+	@Column(name = "message", updatable = true, nullable = false)
+	public String getMessage() {
+		return message;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	@Column(name = "img", updatable = true, nullable = false)
-	public String getImg() {
-		return img;
+	@Column(name = "image", updatable = true, nullable = false)
+	public String getImage() {
+		return image;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", amount=" + amount + ", type=" + type + ", price=" + price + ", description=" + description
-				+ ", img=" + img + "]";
+				+ ", amount=" + amount + ", type=" + type + ", price=" + price + ", message=" + message
+				+ ", image=" + image + "]";
 	}
 	
 
