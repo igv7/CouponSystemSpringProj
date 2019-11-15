@@ -103,5 +103,15 @@ public class IncomeService implements Facade {
 			throw new Exception("Failed to get all incomes by customer " + e.getMessage());
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	public long totalAmount() {
+		return incomeRepository.totalAmount();
+	}
 
 }

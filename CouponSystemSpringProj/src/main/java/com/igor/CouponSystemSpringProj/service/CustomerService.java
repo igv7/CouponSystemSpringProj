@@ -30,6 +30,8 @@ public class CustomerService implements Facade {
 	public void setCustId(long custId) {
 		this.custId = custId;
 	}
+	
+	public double sum = 0;
 
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -102,6 +104,7 @@ public class CustomerService implements Facade {
 					income.setOperationDate(Date.valueOf(LocalDate.now()));
 					income.setDescription(IncomeType.CUSTOMER_PURCHASE);
 					income.setAmount(coupon.getPrice());
+					income.setTotalAmount(sum += coupon.getPrice()); 
 					incomeService.storeIncome(income);
 					System.out.println("Coupon id: " + coupon.getId() + " title: " + coupon.getTitle()
 							+ " was purchased by Customer id: " + customer.getId() + " name: " + customer.getName());

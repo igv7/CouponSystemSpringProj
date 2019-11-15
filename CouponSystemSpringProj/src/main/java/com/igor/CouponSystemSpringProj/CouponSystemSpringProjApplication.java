@@ -8,7 +8,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.igor.CouponSystemSpringProj.model.Income;
 import com.igor.CouponSystemSpringProj.rest.ClientSession;
+import com.igor.CouponSystemSpringProj.service.IncomeService;
 
 @SpringBootApplication//(scanBasePackages="com.igor.CouponSystemSpringProj")
 @EnableJpaRepositories//
@@ -18,6 +20,10 @@ public class CouponSystemSpringProjApplication {
 //		ConfigurableApplicationContext context = SpringApplication.run(CouponSystemSpringProjApplication.class, args);
 		SpringApplication.run(CouponSystemSpringProjApplication.class, args);
 		System.out.println("Welcome to Coupon System!");
+		
+//		IncomeService incomeService = context.getBean(IncomeService.class);
+//		System.out.println("*********************totalAmount***********************");
+//		System.out.println(incomeService.totalAmount());
 	}
 	
 //	@Bean

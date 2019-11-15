@@ -3,6 +3,7 @@ package com.igor.CouponSystemSpringProj.repo;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.igor.CouponSystemSpringProj.model.Income;
@@ -14,6 +15,15 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
 	public List<Income> findAllByClientId (long clientId);
 	
 	public void findByIncomeId(long incomeId);
+	
+	
+	
+	
+	
+	
+	
+	@Query(value = "SELECT sum(amount) FROM Income")
+	public long totalAmount();
 	
 	
 //	public void storeIncome(Income income) throws Exception;//
