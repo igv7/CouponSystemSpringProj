@@ -23,7 +23,7 @@ public class CouponSystemSpringProjApplication {
 		
 //		IncomeService incomeService = context.getBean(IncomeService.class);
 //		System.out.println("*********************totalAmount***********************");
-//		System.out.println(incomeService.totalAmount());
+//		System.out.println(incomeService.totalCommonAmount());
 	}
 	
 //	@Bean

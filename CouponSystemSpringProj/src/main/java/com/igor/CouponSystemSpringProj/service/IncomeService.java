@@ -110,8 +110,8 @@ public class IncomeService implements Facade {
 	
 	
 	
-	public long totalAmount() {
-		return incomeRepository.totalAmount();
+	public double totalCommonAmount() {
+		return incomeRepository.totalCommonAmount();
 	}
 
 }

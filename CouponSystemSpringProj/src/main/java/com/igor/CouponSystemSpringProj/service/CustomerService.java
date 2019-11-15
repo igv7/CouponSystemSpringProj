@@ -104,7 +104,8 @@ public class CustomerService implements Facade {
 					income.setOperationDate(Date.valueOf(LocalDate.now()));
 					income.setDescription(IncomeType.CUSTOMER_PURCHASE);
 					income.setAmount(coupon.getPrice());
-					income.setTotalAmount(sum += coupon.getPrice()); 
+					income.setTotalAmount(sum += coupon.getPrice());
+					income.setTotalCommonAmount(incomeService.totalCommonAmount());
 					incomeService.storeIncome(income);
 					System.out.println("Coupon id: " + coupon.getId() + " title: " + coupon.getTitle()
 							+ " was purchased by Customer id: " + customer.getId() + " name: " + customer.getName());

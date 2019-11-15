@@ -70,6 +70,7 @@ public class CompanyService implements Facade {
 							income.setDescription(IncomeType.COMPANY_NEW_COUPON);
 							income.setAmount(100.0);
 							income.setTotalAmount(sum += income.getAmount());
+							income.setTotalCommonAmount(incomeService.totalCommonAmount());
 							incomeService.storeIncome(income);
 							System.out.println("Success to add Coupon: "+ coupon);
 						}
@@ -105,6 +106,7 @@ public class CompanyService implements Facade {
 			income.setDescription(IncomeType.COMPANY_UPDATE_COUPON);
 			income.setAmount(10.0);
 			income.setTotalAmount(sum += income.getAmount());
+			income.setTotalCommonAmount(incomeService.totalCommonAmount());
 			incomeService.storeIncome(income);
 			System.out.println("Success to update Coupon: "+temp);
 		} catch (Exception e) {

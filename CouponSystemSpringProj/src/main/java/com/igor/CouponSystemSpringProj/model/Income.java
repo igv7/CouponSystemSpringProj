@@ -36,13 +36,14 @@ public class Income {
 	private IncomeType description;
 	private double amount;
 	private double totalAmount;
+	private double totalCommonAmount;
 
 	public Income() {
 		
 	}
 
 	public Income(long incomeId, String clientName, long clientId, Date operationDate,
-			IncomeType description, double amount, double totalAmount) {
+			IncomeType description, double amount, double totalAmount, double totalCommonAmount) {
 		this.incomeId = incomeId;
 		this.clientName = clientName;
 		this.clientId = clientId;
@@ -50,6 +51,7 @@ public class Income {
 		this.description = description;
 		this.amount = amount;
 		this.totalAmount = totalAmount;
+		this.totalCommonAmount = totalCommonAmount;
 	}
 
 	@Id
@@ -117,11 +119,21 @@ public class Income {
 	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	
+	@Column(name = "totalCommonAmount", updatable = true, nullable = false)
+	public double getTotalCommonAmount() {
+		return totalCommonAmount;
+	}
+
+	public void setTotalCommonAmount(double totalCommonAmount) {
+		this.totalCommonAmount = totalCommonAmount;
+	}
 
 	@Override
 	public String toString() {
 		return "Income [incomeId=" + incomeId + ", clientName=" + clientName + ", clientId=" + clientId
-				+ ", operationDate=" + operationDate + ", description=" + description + ", amount=" + amount + ", totalAmount=" + totalAmount + "]";
+				+ ", operationDate=" + operationDate + ", description=" + description + ", amount=" + amount 
+				+ ", totalAmount=" + totalAmount + ", totalCommonAmount=" + totalCommonAmount +"]";
 	}
 	
 

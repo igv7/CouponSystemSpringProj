@@ -23,7 +23,7 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
 	
 	
 	@Query(value = "SELECT sum(amount) FROM Income")
-	public long totalAmount();
+	public double totalCommonAmount();
 	
 	
 //	public void storeIncome(Income income) throws Exception;//
