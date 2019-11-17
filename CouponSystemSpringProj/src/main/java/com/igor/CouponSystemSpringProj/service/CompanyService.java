@@ -183,7 +183,7 @@ public class CompanyService implements Facade {
 				customerRepository.save(customer);
 			}
 //			couponRepository.delete(coupon);
-			couponRepository.deleteById(id);
+			couponRepository.delete(coupon);
 			System.out.println("Success to remove Coupon id: "+id);
 		} catch (Exception e) {
 			throw new CouponSystemException("Could not delete coupon! ", e);
