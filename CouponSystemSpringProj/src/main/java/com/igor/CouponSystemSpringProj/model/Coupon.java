@@ -33,7 +33,7 @@ public class Coupon {
 	private long id;
 	private String title;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-	private Date startDate = Date.valueOf(LocalDate.now());//
+	private Date startDate = Date.valueOf(LocalDate.now().plusDays(1));//
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date endDate;
 	private int amount;

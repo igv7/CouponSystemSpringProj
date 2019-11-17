@@ -46,6 +46,8 @@ public class CompanyService implements Facade {
 	
 	//Create Coupon
 	public Coupon createCoupon(Coupon coupon) throws CouponSystemException {
+		
+		coupon.setEndDate(Date.valueOf(coupon.getEndDate().toLocalDate().plusDays(1)));
 		try {
 			if (couponRepository.existsById(coupon.getId())) {
 				throw new Exception("Company failed to add coupon - this id already in use: " + coupon.getId());
