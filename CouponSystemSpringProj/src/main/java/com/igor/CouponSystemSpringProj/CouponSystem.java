@@ -17,7 +17,8 @@ import com.igor.CouponSystemSpringProj.service.AdminService;
 import com.igor.CouponSystemSpringProj.service.CompanyService;
 import com.igor.CouponSystemSpringProj.service.CustomerService;
 import com.igor.CouponSystemSpringProj.service.Facade;
-import com.igor.CouponSystemSpringProj.task.CouponCleanerDailyTask;
+//import com.igor.CouponSystemSpringProj.task.CouponCleanerDailyTask;
+import com.igor.CouponSystemSpringProj.task.ScheduledTasks;
 import com.igor.CouponSystemSpringProj.task.SessionTimeoutHandler;
 
 @Service
@@ -38,8 +39,11 @@ public class CouponSystem {
 	@Autowired
 	private CustomerRepository customerRepository;
 
+//	@Autowired
+//	private CouponCleanerDailyTask task;
+	
 	@Autowired
-	private CouponCleanerDailyTask task;
+	private ScheduledTasks task;
 
 	@Autowired
 	private SessionTimeoutHandler sessionTask;
@@ -50,14 +54,14 @@ public class CouponSystem {
 	@PostConstruct
 	public void init() {
 		System.out.println("Coupon Cleaner Daily Task in ACTION...");
-		task.start();
+//		task.start();
 		sessionTask.start();
 	}
 
 	@PreDestroy
 	public void destroy() {
 		System.out.println("The system is shut down.");
-		task.stop();
+//		task.stop();
 		sessionTask.stop();
 //		context.close();
 	}
