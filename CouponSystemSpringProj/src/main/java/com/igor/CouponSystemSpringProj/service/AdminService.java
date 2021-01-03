@@ -125,12 +125,12 @@ public class AdminService implements Facade {
 	
 	//Get All Companies
 	public List<Company> getAllCompanies() throws Exception {
-		List<Company> companies = null;//
+		List<Company> companies = null;
 		try {
 			if (companyRepository.findAll().isEmpty()) {
 				throw new Exception("Admin failed to get all companies");
 			} else {
-				companies = companyRepository.findAll(); //List<Company> companies = companyRepository.findAll();
+				companies = companyRepository.findAll();
 				System.out.println(companies);
 				return companies;
 			}
@@ -237,7 +237,7 @@ public class AdminService implements Facade {
 			if (customerRepository.findAll().isEmpty()) {
 				throw new Exception("Admin failed to get all customers");
 			} else {
-				customers = customerRepository.findAll(); //List<Customer> customers = customerRepository.findAll();
+				customers = customerRepository.findAll();
 				System.out.println(customers);
 				return customers;
 			}

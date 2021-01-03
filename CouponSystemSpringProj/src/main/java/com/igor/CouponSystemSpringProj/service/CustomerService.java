@@ -42,25 +42,6 @@ public class CustomerService implements Facade {
 	@Autowired
 	private IncomeService incomeService;
 
-//	//Purchase Coupon
-//	public boolean purchaseCoupon(long id) throws Exception {
-//		Optional<Coupon> optional = couponRepository.findById(id);
-//		if (optional.isPresent()) {
-//			Coupon coupon = couponRepository.getOne(id);
-//			if (coupon.getAmount()>0) {
-//				Customer customer = customerRepository.getOne(custId);
-//				coupon.setAmount(coupon.getAmount()-1);
-//				customer.getCoupons().add(coupon);
-//				customerRepository.save(customer);
-//				couponRepository.save(coupon);
-//				return true;
-//			} else {
-//				return false;
-//			}
-//		} else {
-//			throw new Exception("Coupon does not exixts");
-//		}
-//	}
 
 	// Purchase Coupon
 	public Coupon purchaseCoupon(long id) throws Exception {
@@ -85,11 +66,6 @@ public class CustomerService implements Facade {
 				throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
 						+ " - already purchased same coupon. ");
 			}
-//					System.out.println(getAllPurchasedCoupons().contains(coupon));
-//					if (getAllPurchasedCoupons().contains(coupon)) {
-//					throw new Exception("Customer " + customer.getName() + " unable to purchase coupon id: " + id
-//							+ " - already purchased same coupon. ");
-//				} 
 			if (optional.isPresent()) {
 				coupon = couponRepository.getOne(id);
 				if (coupon.getAmount() > 0) {
@@ -133,7 +109,6 @@ public class CustomerService implements Facade {
 				throw new Exception("Customer " + customer.getName()
 						+ " failed to get all purchased coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCustomerCoupon(customer.getId());
 				System.out.println(coupons);
 				return coupons;
@@ -148,12 +123,10 @@ public class CustomerService implements Facade {
 		Customer customer = customerRepository.findById(custId).get();
 		List<Coupon> coupons = null;//
 		try {
-//			if (couponRepository.findAll().isEmpty()) {
 			if (customer.getCoupons().isEmpty()) {
 				throw new Exception("Customer " + customer.getName()
 						+ " failed to get all purchased coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCustomerCouponByType(customer.getId(), type);
 				System.out.println(coupons);
 				return coupons;
@@ -170,19 +143,11 @@ public class CustomerService implements Facade {
 		Customer customer = customerRepository.findById(custId).get();
 		List<Coupon> coupons = null;//
 		try {
-//			if (couponRepository.findAll().isEmpty()) {
 			if (customer.getCoupons().isEmpty()) {
 				throw new Exception("Customer " + customer.getName()
 						+ " failed to get all purchased coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
-//				coupons = couponRepository.findAllByIdAndPriceLessThanEqual(customer.getId(), price);
 				coupons = couponRepository.findCustomerCouponByPrice(customer.getId(), price);
-//				for (Coupon coupon: coupons) {
-//					if (coupon.getPrice() <= price) {
-//						System.out.println(coupon);
-//					}
-//				}
 				System.out.println(coupons);
 				return coupons;
 			}

@@ -14,33 +14,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//import lombok.ToString;
-
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//import lombok.RequiredArgsConstructor;
-//import lombok.NonNull;
-
 
 @Entity
 @Table
 //@JsonIgnoreProperties(ignoreUnknown = true, value = {"coupons"})
 @JsonIgnoreProperties(value = {"coupons"})
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@RequiredArgsConstructor
 public class Company {
 	
 	private long id;
 	private String name;
 	private String password;
 	private String email;
-//	@ToString.Exclude
 	private List<Coupon> coupons = new ArrayList<Coupon>();
 	
 	public Company() {

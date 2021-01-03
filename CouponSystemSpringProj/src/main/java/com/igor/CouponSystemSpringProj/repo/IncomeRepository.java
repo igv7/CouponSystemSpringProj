@@ -18,10 +18,6 @@ public interface IncomeRepository extends JpaRepository<Income, Long> {
 	
 	
 	
-	
-	
-	
-	
 	@Query(value = "SELECT sum(amount) FROM Income")
 	public double totalCommonAmount();
 	

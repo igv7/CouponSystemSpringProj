@@ -15,17 +15,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.igor.CouponSystemSpringProj.enums.IncomeType;
 
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//import lombok.NonNull;
-//import lombok.RequiredArgsConstructor;
-
 
 @Entity
 @Table
-//@Data
-//@NoArgsConstructor
-//@RequiredArgsConstructor
 public class Income {
 	
 	private long incomeId;

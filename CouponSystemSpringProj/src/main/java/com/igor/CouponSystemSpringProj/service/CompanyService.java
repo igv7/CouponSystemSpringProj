@@ -121,43 +121,6 @@ public class CompanyService implements Facade {
 		return temp;
 	}
 	
-//	public Coupon updateCouponEndDate(long id, Date endDate) throws CouponSystemException {
-//		//check if coupon exists
-//		Coupon coupon = null;
-//		Optional<Coupon> optional = couponRepository.findById(id);
-//		if (!optional.isPresent()) {
-//			throw new CouponSystemException("Coupon does not exist");
-//		} else {
-//			coupon = optional.get();
-//		}
-//		try {
-//			coupon.setEndDate(endDate);
-//			//update
-//			couponRepository.save(coupon);
-//		} catch (Exception e) {
-//			throw new CouponSystemException("Could not update coupon endDate! ", e);
-//		}
-//		return coupon;
-//	}
-//	
-//	public Coupon updateCouponPrice(long id, double price) throws CouponSystemException {
-//		//check if coupon exists
-//		Coupon coupon = null;
-//		Optional<Coupon> optional = couponRepository.findById(id);
-//		if (!optional.isPresent()) {
-//			throw new CouponSystemException("Coupon does not exist");
-//		} else {
-//			coupon = optional.get();
-//		}
-//		try {
-//			coupon.setPrice(price);
-//			//update
-//			couponRepository.save(coupon);
-//		} catch (Exception e) {
-//			throw new CouponSystemException("Could not update coupon price! ", e);
-//		}
-//		return coupon;
-//	}
 	
 	//Remove Coupon
 	public Coupon removeCoupon(long id) throws CouponSystemException {
@@ -182,7 +145,6 @@ public class CompanyService implements Facade {
 //				customer.getCoupons().remove(coupon.getId());
 				customerRepository.save(customer);
 			}
-//			couponRepository.delete(coupon);
 			couponRepository.delete(coupon);
 			System.out.println("Success to remove Coupon id: "+id);
 		} catch (Exception e) {
@@ -215,14 +177,11 @@ public class CompanyService implements Facade {
 	//Get All Coupons
 	public List<Coupon> getAllCoupons() throws Exception {
 		Company company = companyRepository.findById(compId).get();
-		List<Coupon> coupons = null;//
+		List<Coupon> coupons = null;
 		try {
-//			if (couponRepository.findAll().isEmpty()) {
-//			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
 				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCompanyCoupon(company.getId());
 				System.out.println(coupons);
 				return coupons;
@@ -238,12 +197,9 @@ public class CompanyService implements Facade {
 		Company company = companyRepository.findById(compId).get();
 		List<Coupon> coupons = null;//
 		try {
-//			if (couponRepository.findAll().isEmpty()) {
-//			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
 				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
 				coupons = couponRepository.findCompanyCouponByType(company.getId(), type);
 				System.out.println(coupons);
 				return coupons;
@@ -259,20 +215,10 @@ public class CompanyService implements Facade {
 		Company company = companyRepository.findById(compId).get();
 		List<Coupon> coupons = null;//
 		try {
-//			if (couponRepository.findAll().isEmpty()) {
-//			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
 				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
-//				coupons = couponRepository.findAllByIdAndPriceLessThanEqual(company.getId(), price);
 				coupons = couponRepository.findCompanyCouponByPrice(company.getId(), price);
-//				coupons = couponRepository.findCompanyCoupon(company.getId());
-//				for (Coupon coupon: coupons) {
-//					if (coupon.getPrice() <= price) {
-//						System.out.println(coupon);
-//					}
-//				}
 				System.out.println(coupons);
 				return coupons;
 			}
@@ -287,13 +233,9 @@ public class CompanyService implements Facade {
 		Company company = companyRepository.findById(compId).get();
 		List<Coupon> coupons = null;//
 		try {
-//			if (couponRepository.findAll().isEmpty()) {
-//			if (couponRepository.findCompanyCoupon(company.getId() == 0)) {
 			if (company.getCoupons().isEmpty()) {
 				throw new Exception("Company " +company.getName()+ " failed to get all coupons. Coupons do not exist");
 			} else {
-//				coupons = couponRepository.findAll(); //List<Coupon> coupons = couponRepository.findAll();
-//				coupons = couponRepository.findAllByIdAndEndDateLessThanEqual(company.getId(), untilDate);
 				coupons = couponRepository.findCompanyCouponByEndDate(company.getId(), endDate);
 				
 				System.out.println(coupons);

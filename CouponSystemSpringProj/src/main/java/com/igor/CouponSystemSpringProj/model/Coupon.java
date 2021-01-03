@@ -15,19 +15,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.igor.CouponSystemSpringProj.enums.CouponType;
 
-//import lombok.RequiredArgsConstructor;
-
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-
 
 @Entity
 @Table
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@RequiredArgsConstructor
 public class Coupon {
 	
 	private long id;
